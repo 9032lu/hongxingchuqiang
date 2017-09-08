@@ -1,0 +1,23 @@
+//
+//  MoneyPAYViewController.h
+//  BletcShop
+//
+//  Created by apple on 16/8/24.
+//  Copyright © 2016年 bletc. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface MoneyPAYViewController : UIViewController
+
+@property (nonatomic,copy)NSString *user;// <#Description#>
+
+/**
+ 卡的信息
+ */
+@property (nonatomic , strong) NSDictionary *card_dic;
+
+@property (nonatomic,copy) void (^refresheDate)();// 返回时刷新数据
+
+
+@end

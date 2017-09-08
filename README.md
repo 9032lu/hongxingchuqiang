@@ -1,1 +1,1 @@
-# hongxingchuqiang
+# MyBectShopManager

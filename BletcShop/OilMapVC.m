@@ -13,7 +13,7 @@
 #import "BuyOilCardVC.h"
 #import "EricAnnotition.h"
 #import "BaiduMapManager.h"
-@interface OilMapVC ()<BMKMapViewDelegate>
+@interface OilMapVC ()<BMKMapViewDelegate,BMKLocationServiceDelegate,BMKGeoCodeSearchDelegate,BMKRouteSearchDelegate,BNNaviUIManagerDelegate,BNNaviRoutePlanDelegate>
 {
     UIView *topViw;
     NSArray *locationArr;
@@ -202,11 +202,20 @@
         whiteView.clipsToBounds=YES;
         [_scrollView addSubview:whiteView];
         
-        UILabel *shopName=[[UILabel alloc]initWithFrame:CGRectMake(16, 0, whiteView.width-16, 44)];
+        UILabel *shopName=[[UILabel alloc]initWithFrame:CGRectMake(16, 0, whiteView.width-16-60, 44)];
         shopName.text=locationArr[i][@"shop"];
         shopName.font=[UIFont systemFontOfSize:15];
         shopName.textColor=RGB(51, 51, 51);
         [whiteView addSubview:shopName];
+        
+        UIButton *goNavButton=[UIButton buttonWithType:UIButtonTypeCustom];
+        goNavButton.frame=CGRectMake(shopName.right, 0, 60, 44);
+        [goNavButton setTitle:@"到这去" forState:UIControlStateNormal];
+        [goNavButton setTitleColor:RGB(243, 73, 78) forState:UIControlStateNormal];
+        [whiteView addSubview:goNavButton];
+        goNavButton.tag=i;
+        goNavButton.titleLabel.font=[UIFont systemFontOfSize:14.0f];
+        [goNavButton addTarget:self action:@selector(goHaveALook:) forControlEvents:UIControlEventTouchUpInside];
         
         UIView *line=[[UIView alloc]initWithFrame:CGRectMake(0, shopName.bottom, whiteView.width, 1)];
         line.backgroundColor=RGB(192, 192, 192);
@@ -390,6 +399,7 @@
 {
     [super viewWillAppear:animated];
     [self.mapView viewWillAppear];
+    _locService.delegate=self;
     self.mapView.delegate = self; // 此处记得不用的时候需要置nil，否则影响内存的释放
     self.mapView.userInteractionEnabled=YES;
 }
@@ -401,6 +411,7 @@
     onlyOnce=YES;
     [self.mapView viewWillDisappear];
     self.mapView.delegate = nil; // 不用时，置nil
+    _locService.delegate=nil;
 }
 - (void)viewDidAppear:(BOOL)animated {
     if (onlyOnce==NO) {
@@ -475,6 +486,144 @@
 //    [UIView animateWithDuration:0.5 animations:^{
 //        _scrollView.frame=CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT);
 //    }];
+}
+//去导航页面
+-(void)goHaveALook:(UIButton *)sender{
+    if (![self checkServicesInited]) return;
+    [self startNavi:sender.tag];
+}
+- (BOOL)checkServicesInited
+{
+    if(![BNCoreServices_Instance isServicesInited])
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                            message:@"引擎尚未初始化完成，请稍后再试"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"我知道了"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+        return NO;
+    }
+    return YES;
+}
+
+- (void)startNavi:(NSInteger)index
+{
+    BOOL useMyLocation = YES;
+    NSMutableArray *nodesArray = [[NSMutableArray alloc]initWithCapacity:2];
+    //起点 传入的是原始的经纬度坐标，若使用的是百度地图坐标，可以使用BNTools类进行坐标转化
+    //    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+    //    CLLocationCoordinate2D dstLoc;
+    //    dstLoc.longitude = _longitude;
+    //    dstLoc.latitude =_latitude;
+    //
+    //    [self NavigateFrom:appdelegate.userLocation.location.coordinate to:dstLoc];
+    
+    CLLocation *myLocation = [BNCoreServices_Location getLastLocation];
+    BNRoutePlanNode *startNode = [[BNRoutePlanNode alloc] init];
+    startNode.pos = [[BNPosition alloc] init];
+    if (useMyLocation) {
+        startNode.pos.x = myLocation.coordinate.longitude;
+        startNode.pos.y = myLocation.coordinate.latitude;
+        startNode.pos.eType = BNCoordinate_OriginalGPS;
+    }
+    else {
+        startNode.pos.x = 113.948222;
+        startNode.pos.y = 22.549555;
+        startNode.pos.eType = BNCoordinate_BaiduMapSDK;
+    }
+    [nodesArray addObject:startNode];
+    
+    //也可以在此加入1到3个的途经点
+    //
+    //    BNRoutePlanNode *midNode = [[BNRoutePlanNode alloc] init];
+    //    midNode.pos = [[BNPosition alloc] init];
+    //    midNode.pos.x = 113.977004;
+    //    midNode.pos.y = 22.556393;
+    //    //midNode.pos.eType = BNCoordinate_BaiduMapSDK;
+    //    //    [nodesArray addObject:midNode];
+    
+    //终点
+    BNRoutePlanNode *endNode = [[BNRoutePlanNode alloc] init];
+    endNode.pos = [[BNPosition alloc] init];
+    endNode.pos.x =[locationArr[index][@"lontitude"] floatValue];// _longitude;
+    endNode.pos.y = [locationArr[index][@"latitude"] floatValue];//_latitude;
+    endNode.pos.eType = BNCoordinate_BaiduMapSDK;
+    [nodesArray addObject:endNode];
+    
+    //关闭openURL,不想跳转百度地图可以设为YES
+    [BNCoreServices_RoutePlan setDisableOpenUrl:YES];
+    [BNCoreServices_RoutePlan startNaviRoutePlan:BNRoutePlanMode_Recommend naviNodes:nodesArray time:nil delegete:self userInfo:nil];
+}
+
+#pragma mark - BNNaviRoutePlanDelegate
+//算路成功回调
+-(void)routePlanDidFinished:(NSDictionary *)userInfo
+{
+    NSLog(@"算路成功");
+    
+    //路径规划成功，开始导航
+    [BNCoreServices_UI showPage:BNaviUI_NormalNavi delegate:self extParams:nil];
+    
+    //导航中改变终点方法示例
+    /*dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+     BNRoutePlanNode *endNode = [[BNRoutePlanNode alloc] init];
+     endNode.pos = [[BNPosition alloc] init];
+     endNode.pos.x = 114.189863;
+     endNode.pos.y = 22.546236;
+     endNode.pos.eType = BNCoordinate_BaiduMapSDK;
+     [[BNaviModel getInstance] resetNaviEndPoint:endNode];
+     });*/
+}
+
+//算路失败回调
+- (void)routePlanDidFailedWithError:(NSError *)error andUserInfo:(NSDictionary*)userInfo
+{
+    switch ([error code]%10000)
+    {
+        case BNAVI_ROUTEPLAN_ERROR_LOCATIONFAILED:
+            NSLog(@"暂时无法获取您的位置,请稍后重试");
+            break;
+        case BNAVI_ROUTEPLAN_ERROR_ROUTEPLANFAILED:
+            NSLog(@"无法发起导航");
+            break;
+        case BNAVI_ROUTEPLAN_ERROR_LOCATIONSERVICECLOSED:
+            NSLog(@"定位服务未开启,请到系统设置中打开定位服务。");
+            break;
+        case BNAVI_ROUTEPLAN_ERROR_NODESTOONEAR:
+            NSLog(@"起终点距离起终点太近");
+            break;
+        default:
+            NSLog(@"算路失败");
+            break;
+    }
+}
+
+//算路取消回调
+-(void)routePlanDidUserCanceled:(NSDictionary*)userInfo {
+    NSLog(@"算路取消");
+}
+
+#pragma mark - 安静退出导航
+
+- (void)exitNaviUI
+{
+    [BNCoreServices_UI exitPage:EN_BNavi_ExitTopVC animated:YES extraInfo:nil];
+}
+
+#pragma mark - BNNaviUIManagerDelegate
+
+//退出导航页面回调
+- (void)onExitPage:(BNaviUIType)pageType  extraInfo:(NSDictionary*)extraInfo
+{
+    if (pageType == BNaviUI_NormalNavi)
+    {
+        NSLog(@"退出导航");
+    }
+    else if (pageType == BNaviUI_Declaration)
+    {
+        NSLog(@"退出导航声明页面");
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

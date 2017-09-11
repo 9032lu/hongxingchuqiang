@@ -106,8 +106,6 @@
 		184C72091EC305000065EE65 /* ChangeLoginOrPayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184C72071EC305000065EE65 /* ChangeLoginOrPayVC.xib */; };
 		184C720E1EC310CA0065EE65 /* ChangePayPassVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C720D1EC310CA0065EE65 /* ChangePayPassVC.m */; };
 		184C72131EC31A770065EE65 /* ChangePayPassLastVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184C72121EC31A770065EE65 /* ChangePayPassLastVC.m */; };
-		184CB0B31F31B33F00180927 /* NewUserAccessCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184CB0B11F31B33F00180927 /* NewUserAccessCodeVC.m */; };
-		184CB0B41F31B33F00180927 /* NewUserAccessCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184CB0B21F31B33F00180927 /* NewUserAccessCodeVC.xib */; };
 		184E84671F3D923600D8140F /* FriendInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184E84651F3D923600D8140F /* FriendInfoVC.m */; };
 		184E84681F3D923600D8140F /* FriendInfoVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 184E84661F3D923600D8140F /* FriendInfoVC.xib */; };
 		184E846C1F3D9B6F00D8140F /* InvatedFriendsShowVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 184E846A1F3D9B6F00D8140F /* InvatedFriendsShowVC.m */; };
@@ -142,6 +140,13 @@
 		185ABD661D8021EA00BD8097 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 185ABD651D8021EA00BD8097 /* CoreVideo.framework */; };
 		185F484D1F41A37D00A6CE6A /* NewAllCouponsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 185F484B1F41A37D00A6CE6A /* NewAllCouponsVC.m */; };
 		185F484E1F41A37D00A6CE6A /* NewAllCouponsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185F484C1F41A37D00A6CE6A /* NewAllCouponsVC.xib */; };
+		1869914C1F661BA20084D3C8 /* libbaiduNaviSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1869914B1F661BA20084D3C8 /* libbaiduNaviSDK.a */; };
+		186991561F661D000084D3C8 /* NewUserAccessCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1869914E1F661D000084D3C8 /* NewUserAccessCodeVC.m */; };
+		186991571F661D000084D3C8 /* NewUserAccessCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1869914F1F661D000084D3C8 /* NewUserAccessCodeVC.xib */; };
+		186991581F661D000084D3C8 /* NewUserRegistVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 186991511F661D000084D3C8 /* NewUserRegistVC.m */; };
+		186991591F661D000084D3C8 /* NewUserRegistVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186991521F661D000084D3C8 /* NewUserRegistVC.xib */; };
+		1869915A1F661D000084D3C8 /* NewUserSetPassVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 186991541F661D000084D3C8 /* NewUserSetPassVC.m */; };
+		1869915B1F661D000084D3C8 /* NewUserSetPassVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186991551F661D000084D3C8 /* NewUserSetPassVC.xib */; };
 		187E94BE1ED2D8FF007EF19F /* OFFLINEVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 187E94BD1ED2D8FF007EF19F /* OFFLINEVC.m */; };
 		1882F1571F5D1C2B00D9B7D1 /* NewPayCustomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 1882F1561F5D1C2B00D9B7D1 /* NewPayCustomView.m */; };
 		1882F15A1F5D23A800D9B7D1 /* 时间123456@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1882F1581F5D23A800D9B7D1 /* 时间123456@2x.png */; };
@@ -315,10 +320,6 @@
 		18F50E061D1E365800811CD1 /* -2-02.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18F50DEC1D1E365800811CD1 /* -2-02.jpg */; };
 		18F50E071D1E365800811CD1 /* -2-03.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18F50DED1D1E365800811CD1 /* -2-03.jpg */; };
 		18F6C16C1DAB7D50004E6FCA /* 1234567890.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 18F6C16B1DAB7D50004E6FCA /* 1234567890.jpg */; };
-		18FA58D41EEA769C00F458F2 /* NewUserRegistVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FA58CD1EEA769C00F458F2 /* NewUserRegistVC.m */; };
-		18FA58D51EEA769C00F458F2 /* NewUserRegistVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FA58CE1EEA769C00F458F2 /* NewUserRegistVC.xib */; };
-		18FA58D61EEA769C00F458F2 /* NewUserSetPassVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FA58D01EEA769C00F458F2 /* NewUserSetPassVC.m */; };
-		18FA58D71EEA769C00F458F2 /* NewUserSetPassVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FA58D11EEA769C00F458F2 /* NewUserSetPassVC.xib */; };
 		18FA58DB1EEA89C000F458F2 /* RailNameConfirmVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FA58D91EEA89C000F458F2 /* RailNameConfirmVC.m */; };
 		18FA58DC1EEA89C000F458F2 /* RailNameConfirmVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18FA58DA1EEA89C000F458F2 /* RailNameConfirmVC.xib */; };
 		18FA58DE1EEA92C900F458F2 /* 姓名she@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FA58DD1EEA92C900F458F2 /* 姓名she@3x.png */; };
@@ -1330,9 +1331,6 @@
 		184C720D1EC310CA0065EE65 /* ChangePayPassVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePayPassVC.m; sourceTree = "<group>"; };
 		184C72111EC31A770065EE65 /* ChangePayPassLastVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePayPassLastVC.h; sourceTree = "<group>"; };
 		184C72121EC31A770065EE65 /* ChangePayPassLastVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePayPassLastVC.m; sourceTree = "<group>"; };
-		184CB0B01F31B33F00180927 /* NewUserAccessCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserAccessCodeVC.h; sourceTree = "<group>"; };
-		184CB0B11F31B33F00180927 /* NewUserAccessCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserAccessCodeVC.m; sourceTree = "<group>"; };
-		184CB0B21F31B33F00180927 /* NewUserAccessCodeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserAccessCodeVC.xib; sourceTree = "<group>"; };
 		184E84641F3D923600D8140F /* FriendInfoVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendInfoVC.h; sourceTree = "<group>"; };
 		184E84651F3D923600D8140F /* FriendInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendInfoVC.m; sourceTree = "<group>"; };
 		184E84661F3D923600D8140F /* FriendInfoVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendInfoVC.xib; sourceTree = "<group>"; };
@@ -1378,6 +1376,16 @@
 		185F484A1F41A37D00A6CE6A /* NewAllCouponsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAllCouponsVC.h; sourceTree = "<group>"; };
 		185F484B1F41A37D00A6CE6A /* NewAllCouponsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewAllCouponsVC.m; sourceTree = "<group>"; };
 		185F484C1F41A37D00A6CE6A /* NewAllCouponsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewAllCouponsVC.xib; sourceTree = "<group>"; };
+		1869914B1F661BA20084D3C8 /* libbaiduNaviSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaiduNaviSDK.a; sourceTree = "<group>"; };
+		1869914D1F661D000084D3C8 /* NewUserAccessCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserAccessCodeVC.h; sourceTree = "<group>"; };
+		1869914E1F661D000084D3C8 /* NewUserAccessCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserAccessCodeVC.m; sourceTree = "<group>"; };
+		1869914F1F661D000084D3C8 /* NewUserAccessCodeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserAccessCodeVC.xib; sourceTree = "<group>"; };
+		186991501F661D000084D3C8 /* NewUserRegistVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserRegistVC.h; sourceTree = "<group>"; };
+		186991511F661D000084D3C8 /* NewUserRegistVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserRegistVC.m; sourceTree = "<group>"; };
+		186991521F661D000084D3C8 /* NewUserRegistVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserRegistVC.xib; sourceTree = "<group>"; };
+		186991531F661D000084D3C8 /* NewUserSetPassVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserSetPassVC.h; sourceTree = "<group>"; };
+		186991541F661D000084D3C8 /* NewUserSetPassVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserSetPassVC.m; sourceTree = "<group>"; };
+		186991551F661D000084D3C8 /* NewUserSetPassVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserSetPassVC.xib; sourceTree = "<group>"; };
 		187E94BC1ED2D8FF007EF19F /* OFFLINEVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OFFLINEVC.h; sourceTree = "<group>"; };
 		187E94BD1ED2D8FF007EF19F /* OFFLINEVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OFFLINEVC.m; sourceTree = "<group>"; };
 		1882F1551F5D1C2B00D9B7D1 /* NewPayCustomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPayCustomView.h; sourceTree = "<group>"; };
@@ -1598,12 +1606,6 @@
 		18F50DEC1D1E365800811CD1 /* -2-02.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "-2-02.jpg"; sourceTree = "<group>"; };
 		18F50DED1D1E365800811CD1 /* -2-03.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "-2-03.jpg"; sourceTree = "<group>"; };
 		18F6C16B1DAB7D50004E6FCA /* 1234567890.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 1234567890.jpg; path = ../BletcShop/1234567890.jpg; sourceTree = "<group>"; };
-		18FA58CC1EEA769C00F458F2 /* NewUserRegistVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserRegistVC.h; sourceTree = "<group>"; };
-		18FA58CD1EEA769C00F458F2 /* NewUserRegistVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserRegistVC.m; sourceTree = "<group>"; };
-		18FA58CE1EEA769C00F458F2 /* NewUserRegistVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserRegistVC.xib; sourceTree = "<group>"; };
-		18FA58CF1EEA769C00F458F2 /* NewUserSetPassVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserSetPassVC.h; sourceTree = "<group>"; };
-		18FA58D01EEA769C00F458F2 /* NewUserSetPassVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserSetPassVC.m; sourceTree = "<group>"; };
-		18FA58D11EEA769C00F458F2 /* NewUserSetPassVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserSetPassVC.xib; sourceTree = "<group>"; };
 		18FA58D81EEA89C000F458F2 /* RailNameConfirmVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RailNameConfirmVC.h; sourceTree = "<group>"; };
 		18FA58D91EEA89C000F458F2 /* RailNameConfirmVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RailNameConfirmVC.m; sourceTree = "<group>"; };
 		18FA58DA1EEA89C000F458F2 /* RailNameConfirmVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RailNameConfirmVC.xib; sourceTree = "<group>"; };
@@ -3012,6 +3014,7 @@
 				D94113541CE9A3D7008E231F /* AlipaySDK.framework in Frameworks */,
 				D94DF2661CAE6C7A000D5B69 /* CIA_SDK.framework in Frameworks */,
 				D94743A51CE5728000D1D3EE /* BaiduMapAPI_Search.framework in Frameworks */,
+				1869914C1F661BA20084D3C8 /* libbaiduNaviSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4656,6 +4659,7 @@
 		D90C4CCE1F612C0900B7E08A /* BaiduNaviSDK */ = {
 			isa = PBXGroup;
 			children = (
+				1869914B1F661BA20084D3C8 /* libbaiduNaviSDK.a */,
 				D90C4CCF1F612C0900B7E08A /* baiduNaviSDK.bundle */,
 				D90C4CD01F612C0900B7E08A /* baiduNaviSDK.xcassets */,
 				D90C4CD11F612C0900B7E08A /* inc */,
@@ -4843,15 +4847,15 @@
 		D93C1A2D1EEA73F8006DA624 /* 新用户注册 */ = {
 			isa = PBXGroup;
 			children = (
-				18FA58CC1EEA769C00F458F2 /* NewUserRegistVC.h */,
-				18FA58CD1EEA769C00F458F2 /* NewUserRegistVC.m */,
-				18FA58CE1EEA769C00F458F2 /* NewUserRegistVC.xib */,
-				184CB0B01F31B33F00180927 /* NewUserAccessCodeVC.h */,
-				184CB0B11F31B33F00180927 /* NewUserAccessCodeVC.m */,
-				184CB0B21F31B33F00180927 /* NewUserAccessCodeVC.xib */,
-				18FA58CF1EEA769C00F458F2 /* NewUserSetPassVC.h */,
-				18FA58D01EEA769C00F458F2 /* NewUserSetPassVC.m */,
-				18FA58D11EEA769C00F458F2 /* NewUserSetPassVC.xib */,
+				186991501F661D000084D3C8 /* NewUserRegistVC.h */,
+				186991511F661D000084D3C8 /* NewUserRegistVC.m */,
+				186991521F661D000084D3C8 /* NewUserRegistVC.xib */,
+				1869914D1F661D000084D3C8 /* NewUserAccessCodeVC.h */,
+				1869914E1F661D000084D3C8 /* NewUserAccessCodeVC.m */,
+				1869914F1F661D000084D3C8 /* NewUserAccessCodeVC.xib */,
+				186991531F661D000084D3C8 /* NewUserSetPassVC.h */,
+				186991541F661D000084D3C8 /* NewUserSetPassVC.m */,
+				186991551F661D000084D3C8 /* NewUserSetPassVC.xib */,
 			);
 			name = "新用户注册";
 			sourceTree = "<group>";
@@ -6677,6 +6681,7 @@
 				D9541EA61E1FA994003022E5 /* 商消乐002.png in Resources */,
 				D9AB25411D88E4ED000E9288 /* VoiceSearchFeedback019@2x.png in Resources */,
 				D9AE75351D2E382B00269EC5 /* welcom_3.png in Resources */,
+				186991591F661D000084D3C8 /* NewUserRegistVC.xib in Resources */,
 				18F27EE91D640E84002DD03A /* 头像-1.png in Resources */,
 				185A45911F132F2A0033AFE3 /* UserInfoSexyCell.xib in Resources */,
 				D923025A1D152443008FB9A9 /* user_ed.png in Resources */,
@@ -6868,6 +6873,7 @@
 				D949C15A1CBF7E4D0091D8FC /* withdrawu.png in Resources */,
 				18F0320C1E5ED79300ACD261 /* tempProducts_07.jpg in Resources */,
 				D980B66A1D77FBAB00CC6637 /* ContactCell.xib in Resources */,
+				1869915B1F661D000084D3C8 /* NewUserSetPassVC.xib in Resources */,
 				18F27EF31D640E84002DD03A /* 头像-11.png in Resources */,
 				1C9E824F1C608A140007BF02 /* sousuo@2x.png in Resources */,
 				D9FF0D931D53304C00443312 /* 图标-05new.png in Resources */,
@@ -7124,7 +7130,6 @@
 				D9AA10CE1F04914F00F7EDE8 /* MealAndExpCardManageVC.xib in Resources */,
 				18148E5D1F16237B001C86AC /* NewAppriseVC.xib in Resources */,
 				1CF6E4801C61E4350001159C /* guanggao@2x.png in Resources */,
-				184CB0B41F31B33F00180927 /* NewUserAccessCodeVC.xib in Resources */,
 				D986A1C81DE57849007B798B /* PaySuccessVc.xib in Resources */,
 				D98E5C211E51525E009D56BF /* SRVideoPlayer.bundle in Resources */,
 				D92ACE081F0F341F00858727 /* ShopDetailCouponsCell.xib in Resources */,
@@ -7153,6 +7158,7 @@
 				D9D50DB91D87DE2800A5E469 /* d_aini@2x.png in Resources */,
 				D97338C11ED666600093A2FB /* 下角标ss.png in Resources */,
 				D9345E651E766EE6006B2AC1 /* DefaultAddressCell.xib in Resources */,
+				186991571F661D000084D3C8 /* NewUserAccessCodeVC.xib in Resources */,
 				1A8312811D88544D001BC3B6 /* chat_sender_audio_playing_000@2x.png in Resources */,
 				1836B83B1E559D5000B587A6 /* Active_top1.jpg in Resources */,
 				182F3C621F0CEFB300540FAE /* PersonalEricCell.xib in Resources */,
@@ -7174,7 +7180,6 @@
 				D94DF2521CAE0AA4000D5B69 /* star_highlighted.png in Resources */,
 				D9ABB1AE1EC9408E00FBE080 /* ApriseVC.xib in Resources */,
 				D971EB411EF287210038614E /* 首页顶部海报.png in Resources */,
-				18FA58D51EEA769C00F458F2 /* NewUserRegistVC.xib in Resources */,
 				D97227421F3947DF009D0E2A /* OilCardManagerVC.xib in Resources */,
 				D987BB371E792C8E008AE24D /* UserInfoEditVC.xib in Resources */,
 				18D7C48A1D5B12BA00AEF545 /* mohu-06.png in Resources */,
@@ -7209,7 +7214,6 @@
 				D9BB4DE41E051DB800971BCC /* 关闭.png in Resources */,
 				18BE63BD1E681F3D001563C6 /* timg-3.jpeg in Resources */,
 				1C9E822E1C603B7A0007BF02 /* jiantou.png in Resources */,
-				18FA58D71EEA769C00F458F2 /* NewUserSetPassVC.xib in Resources */,
 				D98FDF871E601C280057C206 /* AD_ad_tb@3x.png in Resources */,
 				189899F81F3AC0E8004D1543 /* oil5.jpg in Resources */,
 				D97F60031D62BFF8000EE794 /* line@2x.png in Resources */,
@@ -7287,6 +7291,7 @@
 				D93C0D6E1D251FC1001A1AC1 /* BackChooseStateViewController.m in Sources */,
 				D98E5C1A1E51524D009D56BF /* SRVideoLayerView.m in Sources */,
 				D9A06B601D8679C30037795B /* EMCDDeviceManagerBase.m in Sources */,
+				186991561F661D000084D3C8 /* NewUserAccessCodeVC.m in Sources */,
 				D9D50DB71D87DE0E00A5E469 /* ExpressionKeyboardView.m in Sources */,
 				D9CF3FA21D7671D500D9D0EC /* ApplyAndNoticeVC.m in Sources */,
 				1829884B1E727DF200164F32 /* SweetNoticeVC.m in Sources */,
@@ -7330,6 +7335,7 @@
 				D9764E8F1DD5B62100B088DE /* PointConvertViewController.m in Sources */,
 				D9442ADD1D1E330A00956AB4 /* Singleton.m in Sources */,
 				18F05E671E2626BD002E4C10 /* TransferOwnershipViewController.m in Sources */,
+				186991581F661D000084D3C8 /* NewUserRegistVC.m in Sources */,
 				D94040441CBE353700EC98EA /* DelayViewController.m in Sources */,
 				D98787291E27229000C7A828 /* ComplaintVC.m in Sources */,
 				D9AB25191D88E482000E9288 /* EaseRecordView.m in Sources */,
@@ -7553,7 +7559,6 @@
 				1CDCCD181C7594040094E70D /* AFHTTPRequestOperationManager.m in Sources */,
 				188372491F29876D0076D2D8 /* ComplainProcessNormalVC.m in Sources */,
 				D9824F501F134B9600301076 /* InsureVC.m in Sources */,
-				18FA58D41EEA769C00F458F2 /* NewUserRegistVC.m in Sources */,
 				D925D1851E7106EB0000B8B1 /* SelectAddressViewController.m in Sources */,
 				D9699E541D34B88B001DEC06 /* MoneyBagChoiceTypeViewController.m in Sources */,
 				D98E5BFC1E515210009D56BF /* MASConstraint.m in Sources */,
@@ -7641,6 +7646,7 @@
 				D9A33E661F5E37CE00304F83 /* OilCardPayMentVC.m in Sources */,
 				1CDCCD171C7594040094E70D /* AFHTTPRequestOperation.m in Sources */,
 				180D0D3C1F0DCE2F00A39790 /* ShopProductsDetailsVC.m in Sources */,
+				1869915A1F661D000084D3C8 /* NewUserSetPassVC.m in Sources */,
 				D98011D31DF7B0DD00CE09CA /* ErrorQRViewController.m in Sources */,
 				D949EC101CE1917E0023B6D6 /* BAddressPickerController.m in Sources */,
 				D9B3A5C21D74255700F3F27E /* PSTCollectionViewLayout.m in Sources */,
@@ -7658,7 +7664,6 @@
 				D9955C6D1D488F4E00E1BF57 /* OrderInfomaViewController.m in Sources */,
 				D94743951CE56A6000D1D3EE /* LNSearchManager.m in Sources */,
 				18302A2D1DAC8B0E00E6EF8C /* CanPayCardViewController.m in Sources */,
-				18FA58D61EEA769C00F458F2 /* NewUserSetPassVC.m in Sources */,
 				D9B3A5A81D74255700F3F27E /* MWTapDetectingView.m in Sources */,
 				079386C31C55BC220021B385 /* ShoppingViewController.m in Sources */,
 				D9B923221F271E32003AA113 /* AroundViewController.m in Sources */,
@@ -7690,7 +7695,6 @@
 				1C07697C1C7C324400F3D29B /* LandingController.m in Sources */,
 				D9B3A4A31D73D6A900F3F27E /* LZDContentView.m in Sources */,
 				D971FABB1E2DE82A00C5387C /* CardMarketSearchVC.m in Sources */,
-				184CB0B31F31B33F00180927 /* NewUserAccessCodeVC.m in Sources */,
 				D9B3A5BF1D74255700F3F27E /* PSTCollectionViewData.m in Sources */,
 				D958AD641E654CF200B0776F /* JHChart.m in Sources */,
 				D987872E1E272A3200C7A828 /* ComplaintDetailVC.m in Sources */,

@@ -132,7 +132,6 @@
 		185ABD661D8021EA00BD8097 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 185ABD651D8021EA00BD8097 /* CoreVideo.framework */; };
 		185F484D1F41A37D00A6CE6A /* NewAllCouponsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 185F484B1F41A37D00A6CE6A /* NewAllCouponsVC.m */; };
 		185F484E1F41A37D00A6CE6A /* NewAllCouponsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185F484C1F41A37D00A6CE6A /* NewAllCouponsVC.xib */; };
-		1869914C1F661BA20084D3C8 /* libbaiduNaviSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1869914B1F661BA20084D3C8 /* libbaiduNaviSDK.a */; };
 		186991561F661D000084D3C8 /* NewUserAccessCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1869914E1F661D000084D3C8 /* NewUserAccessCodeVC.m */; };
 		186991571F661D000084D3C8 /* NewUserAccessCodeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1869914F1F661D000084D3C8 /* NewUserAccessCodeVC.xib */; };
 		186991581F661D000084D3C8 /* NewUserRegistVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 186991511F661D000084D3C8 /* NewUserRegistVC.m */; };
@@ -900,6 +899,7 @@
 		D9B8940A1F6239F200278B74 /* BaiduMapViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D9B894091F6239F200278B74 /* BaiduMapViewController.mm */; };
 		D9B8940E1F624AB300278B74 /* 组-4-拷贝-5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B8940C1F624AB300278B74 /* 组-4-拷贝-5@3x.png */; };
 		D9B8940F1F624AB300278B74 /* 组-4-拷贝-5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B8940D1F624AB300278B74 /* 组-4-拷贝-5@2x.png */; };
+		D9B894151F6622FA00278B74 /* libbaiduNaviSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9B894141F6622FA00278B74 /* libbaiduNaviSDK.a */; };
 		D9B9231D1F26D447003AA113 /* CardmarketDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B9231C1F26D447003AA113 /* CardmarketDetailVC.xib */; };
 		D9B923221F271E32003AA113 /* AroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B923201F271E32003AA113 /* AroundViewController.m */; };
 		D9B923231F271E32003AA113 /* AroundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B923211F271E32003AA113 /* AroundViewController.xib */; };
@@ -1193,7 +1193,6 @@
 		185F484A1F41A37D00A6CE6A /* NewAllCouponsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewAllCouponsVC.h; sourceTree = "<group>"; };
 		185F484B1F41A37D00A6CE6A /* NewAllCouponsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewAllCouponsVC.m; sourceTree = "<group>"; };
 		185F484C1F41A37D00A6CE6A /* NewAllCouponsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewAllCouponsVC.xib; sourceTree = "<group>"; };
-		1869914B1F661BA20084D3C8 /* libbaiduNaviSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaiduNaviSDK.a; sourceTree = "<group>"; };
 		1869914D1F661D000084D3C8 /* NewUserAccessCodeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewUserAccessCodeVC.h; sourceTree = "<group>"; };
 		1869914E1F661D000084D3C8 /* NewUserAccessCodeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewUserAccessCodeVC.m; sourceTree = "<group>"; };
 		1869914F1F661D000084D3C8 /* NewUserAccessCodeVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewUserAccessCodeVC.xib; sourceTree = "<group>"; };
@@ -2465,6 +2464,7 @@
 		D9B894091F6239F200278B74 /* BaiduMapViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BaiduMapViewController.mm; sourceTree = "<group>"; };
 		D9B8940C1F624AB300278B74 /* 组-4-拷贝-5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-4-拷贝-5@3x.png"; sourceTree = "<group>"; };
 		D9B8940D1F624AB300278B74 /* 组-4-拷贝-5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-4-拷贝-5@2x.png"; sourceTree = "<group>"; };
+		D9B894141F6622FA00278B74 /* libbaiduNaviSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaiduNaviSDK.a; sourceTree = "<group>"; };
 		D9B9231C1F26D447003AA113 /* CardmarketDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardmarketDetailVC.xib; sourceTree = "<group>"; };
 		D9B9231F1F271E32003AA113 /* AroundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AroundViewController.h; sourceTree = "<group>"; };
 		D9B923201F271E32003AA113 /* AroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AroundViewController.m; sourceTree = "<group>"; };
@@ -2616,6 +2616,7 @@
 				D90C4CF01F612EA300B7E08A /* GLKit.framework in Frameworks */,
 				1C299D1E1C71678100F38BFE /* OpenGLES.framework in Frameworks */,
 				1C299D241C7167A800F38BFE /* Security.framework in Frameworks */,
+				D9B894151F6622FA00278B74 /* libbaiduNaviSDK.a in Frameworks */,
 				D90C4CEE1F612E8C00B7E08A /* JavaScriptCore.framework in Frameworks */,
 				1C299D201C71678F00F38BFE /* SystemConfiguration.framework in Frameworks */,
 				D9B3A4831D73C7AC00F3F27E /* AVFoundation.framework in Frameworks */,
@@ -2664,7 +2665,6 @@
 				D94113541CE9A3D7008E231F /* AlipaySDK.framework in Frameworks */,
 				D94DF2661CAE6C7A000D5B69 /* CIA_SDK.framework in Frameworks */,
 				D94743A51CE5728000D1D3EE /* BaiduMapAPI_Search.framework in Frameworks */,
-				1869914C1F661BA20084D3C8 /* libbaiduNaviSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4178,7 +4178,7 @@
 		D90C4CCE1F612C0900B7E08A /* BaiduNaviSDK */ = {
 			isa = PBXGroup;
 			children = (
-				1869914B1F661BA20084D3C8 /* libbaiduNaviSDK.a */,
+				D9B894141F6622FA00278B74 /* libbaiduNaviSDK.a */,
 				D90C4CCF1F612C0900B7E08A /* baiduNaviSDK.bundle */,
 				D90C4CD01F612C0900B7E08A /* baiduNaviSDK.xcassets */,
 				D90C4CD11F612C0900B7E08A /* inc */,

@@ -2616,7 +2616,6 @@
 				D90C4CF01F612EA300B7E08A /* GLKit.framework in Frameworks */,
 				1C299D1E1C71678100F38BFE /* OpenGLES.framework in Frameworks */,
 				1C299D241C7167A800F38BFE /* Security.framework in Frameworks */,
-				D9B894151F6622FA00278B74 /* libbaiduNaviSDK.a in Frameworks */,
 				D90C4CEE1F612E8C00B7E08A /* JavaScriptCore.framework in Frameworks */,
 				1C299D201C71678F00F38BFE /* SystemConfiguration.framework in Frameworks */,
 				D9B3A4831D73C7AC00F3F27E /* AVFoundation.framework in Frameworks */,
@@ -2665,6 +2664,7 @@
 				D94113541CE9A3D7008E231F /* AlipaySDK.framework in Frameworks */,
 				D94DF2661CAE6C7A000D5B69 /* CIA_SDK.framework in Frameworks */,
 				D94743A51CE5728000D1D3EE /* BaiduMapAPI_Search.framework in Frameworks */,
+				D9B894151F6622FA00278B74 /* libbaiduNaviSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

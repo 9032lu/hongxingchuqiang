@@ -278,7 +278,7 @@
              UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"提示" message:@"支付成功" preferredStyle:UIAlertControllerStyleAlert];
              UIAlertAction *sure = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
                
-                 self.refresheDate();
+//                 self.refresheDate();
                  PayVictoryVC *vc=[[PayVictoryVC alloc]init];
                  NSMutableDictionary *dictionary=[NSMutableDictionary dictionaryWithDictionary:params];
                  [dictionary setObject:self.card_dic[@"store"] forKey:@"store"];

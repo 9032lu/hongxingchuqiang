@@ -363,7 +363,15 @@
             
             [session stopRunning];
             
+            
             NSDictionary *dic =[NSDictionary dictionaryWithJsonString:stringValue];
+            
+            if ([stringValue containsString:@"www.cnconsum.com"]) {
+                NSArray *arr= [stringValue componentsSeparatedByString:@"/"];
+                
+                
+                dic = [NSDictionary dictionaryWithObject:[arr lastObject] forKey:@"muid"];
+            }
             NSLog(@"-------%@",dic);
             
             if (dic ==nil) {

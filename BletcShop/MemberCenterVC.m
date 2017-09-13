@@ -29,7 +29,7 @@
     
     UIView *lineView;
     UIView *topView;
-    UIView *topBackView;
+    
     
     UIView *slipBackView;
     NSMutableArray* _adverImages;
@@ -44,6 +44,7 @@
     
 }
 
+@property(nonatomic,strong)UIView *topBackView;
 @property(nonatomic,strong)SDRefreshFooterView *refreshFooter;
 @property(nonatomic,strong)SDRefreshHeaderView *refreshheader;
 @property(nonatomic,strong)UIButton *oldBtn;
@@ -106,12 +107,12 @@
     
 }
 -(void)creatTopbackView{
-    topBackView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 180+45)];
-    [self.view addSubview:topBackView];
+    self.topBackView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 180+45)];
+    [self.view addSubview:self.topBackView];
     
     slipBackView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 95)];
     slipBackView.backgroundColor=RGB(240, 240, 240);
-    [topBackView addSubview:slipBackView];
+    [_topBackView addSubview:slipBackView];
     
     cycleScrollView2 = [SDCycleScrollView cycleScrollViewWithFrame:slipBackView.frame delegate:nil placeholderImage:[UIImage imageNamed:@""]];
     cycleScrollView2.imageURLStringsGroup = _adverImages;
@@ -134,7 +135,7 @@
     
     UIView *headView = [[UIView alloc]initWithFrame:CGRectMake(0, slipBackView.bottom+10, SCREENWIDTH, 65)];
     headView.backgroundColor = [UIColor whiteColor];
-    [topBackView addSubview:headView];
+    [_topBackView addSubview:headView];
     
     headImageView=[[UIImageView alloc]initWithFrame:CGRectMake(13, 13, 40, 40)];
     headImageView.image=[UIImage imageNamed:@"userHeader"];
@@ -200,7 +201,7 @@
     
     topView = [[UIView alloc]initWithFrame:CGRectMake(0, headView.bottom+10, SCREENWIDTH, 44)];
     topView.backgroundColor = [UIColor whiteColor];
-    [topBackView addSubview:topView];
+    [_topBackView addSubview:topView];
     
     
     for (int i = 0; i <self.headArray.count; i ++) {
@@ -1131,40 +1132,60 @@
 
 
 
-
-
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
-    if ([keyPath isEqualToString:@"contentOffset"]) {
+    if (scrollView ==_mainTableView) {
         
+        CGPoint offset = scrollView.contentOffset;
         
-        CGPoint offset = [change[NSKeyValueChangeNewKey] CGPointValue];
         
         if (offset.y>=0 && offset.y <=180) {
             
-        CGRect newFrame = CGRectMake(0, -offset.y, SCREENWIDTH, 180+45);
-
-        topBackView.frame = newFrame;
+            CGRect newFrame = _topBackView.frame;
             
-            _mainTableView.frame = CGRectMake(0, topBackView.bottom, SCREENWIDTH, SCREENHEIGHT-(64+topBackView.bottom));
+            newFrame.origin.y = -offset.y;
+            _topBackView.frame =newFrame;
+            
+            CGRect mainFrame = _mainTableView.frame;
+            mainFrame.origin.y = _topBackView.bottom;
+            mainFrame.size.height = SCREENHEIGHT-(64+_topBackView.bottom);
+            _mainTableView.frame = mainFrame;
+            
+            
             
         }else if (offset.y >180){
-            topBackView.frame = CGRectMake(0, -180, SCREENWIDTH, 180+45);
-            _mainTableView.frame = CGRectMake(0, topBackView.bottom, SCREENWIDTH, SCREENHEIGHT-(64+topBackView.bottom));
-
-
+            _topBackView.frame = CGRectMake(0, -180, SCREENWIDTH, 180+45);
+            _mainTableView.frame = CGRectMake(0, _topBackView.bottom, SCREENWIDTH, SCREENHEIGHT-(64+_topBackView.bottom));
+            
+            
         }else if (offset.y <0){
             
-            topBackView.frame = CGRectMake(0, 0, SCREENWIDTH, 180+45);
-            _mainTableView.frame = CGRectMake(0, topBackView.bottom, SCREENWIDTH, SCREENHEIGHT-(64+topBackView.bottom));
-
+            _topBackView.frame = CGRectMake(0, 0, SCREENWIDTH, 180+45);
+            _mainTableView.frame = CGRectMake(0, _topBackView.bottom, SCREENWIDTH, SCREENHEIGHT-(64+_topBackView.bottom));
+            
         }
+
         
- 
     }
-   
+  
+    
     
 }
+
+
+//-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+//    
+//    if ([keyPath isEqualToString:@"contentOffset"]) {
+//        
+//        
+//        CGPoint offset = [change[NSKeyValueChangeNewKey] CGPointValue];
+//        
+//        
+// 
+//    }
+//   
+//    
+//}
 
 
 
@@ -1206,7 +1227,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [_mainTableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+//    [_mainTableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
 
     //根据是否登录去请求积分等数据
     AppDelegate *delegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -1228,7 +1249,7 @@
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
-    [_mainTableView removeObserver:self forKeyPath:@"contentOffset"];
+//    [_mainTableView removeObserver:self forKeyPath:@"contentOffset"];
     
 }
 @end

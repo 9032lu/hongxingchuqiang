@@ -241,20 +241,27 @@
         
         NSArray *oilKindArr=@[@"95#",@"92#",@"柴油"];
         NSArray *oilPriceArr=@[@"6.24元／升",@"5.90元／升",@"5.50元／升"];
+        NSArray *trendArr=@[@"上涨",@"下降",@"正常"];
         for (int j=0; j<3; j++) {
-            UILabel *oilKind=[[UILabel alloc]initWithFrame:CGRectMake(j*addressView.width/3, addressView.bottom, SCREENWIDTH/3, 32)];
+            UILabel *oilKind=[[UILabel alloc]initWithFrame:CGRectMake(j%3*((addressView.width-2)/3+1), addressView.bottom, (addressView.width-2)/3, 32)];
             oilKind.textColor=RGB(51, 51, 51);
             oilKind.textAlignment=NSTextAlignmentCenter;
             oilKind.font=[UIFont systemFontOfSize:14];
             oilKind.text=oilKindArr[j];
             [whiteView addSubview:oilKind];
             
-            UILabel *oilPriceLable=[[UILabel alloc]initWithFrame:CGRectMake(j*addressView.width/3, oilKind.bottom, SCREENWIDTH/3, 32)];
+            UILabel *oilPriceLable=[[UILabel alloc]initWithFrame:CGRectMake(j%3*((addressView.width-2)/3+1), oilKind.bottom, (addressView.width-2)/3, 32)];
             oilPriceLable.font=[UIFont systemFontOfSize:14];
             oilPriceLable.text=oilPriceArr[j];
             oilPriceLable.textAlignment=NSTextAlignmentCenter;
             oilPriceLable.textColor=RGB(51, 51, 51);
             [whiteView addSubview:oilPriceLable];
+            UIView *sepLine=[[UIView alloc]initWithFrame:CGRectMake(oilKind.right, addressView.bottom, 1, 62)];
+            sepLine.backgroundColor=RGB(192, 192, 192);
+            [whiteView addSubview:sepLine];
+            UIImageView *trend=[[UIImageView alloc]initWithFrame:CGRectMake(oilPriceLable.right-10, oilPriceLable.top+9, 4, 14)];
+            trend.image=[UIImage imageNamed:trendArr[j]];
+            [whiteView addSubview:trend];
         }
         UIView *line2=[[UIView alloc]initWithFrame:CGRectMake(0,whiteView.height-45 ,whiteView.width , 1)];
         line2.backgroundColor=RGB(192, 192, 192);
@@ -451,7 +458,7 @@
         newAnnotationView.enabled=YES;
         newAnnotationView.pinColor = BMKPinAnnotationColorPurple;
         //newAnnotationView.animatesDrop = YES; // 设置该标注点动画显示
-        newAnnotationView.image = [UIImage imageNamed:@"油站图标"];
+        newAnnotationView.image = [UIImage imageNamed:@"中石化"];
         
         
         EricAnnotition *annotition=annotation;

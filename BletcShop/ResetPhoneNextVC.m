@@ -141,6 +141,10 @@
     }
     
 }
+static SEL extracted() {
+    return @selector(removeAlertViewFromCurrentVC:);
+}
+
 //用户改手机号
 -(void)postRequest{
     
@@ -171,7 +175,7 @@
              myalertView=[[BindCustomView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
              
              myalertView.phoneLable.text = [NSString stringWithFormat:@"您的新手机号：%@",self.phone];
-             [myalertView.completeBtn addTarget:self action:@selector(removeAlertViewFromCurrentVC:) forControlEvents:UIControlEventTouchUpInside];
+             [myalertView.completeBtn addTarget:self action:extracted() forControlEvents:UIControlEventTouchUpInside];
              [self.view addSubview:myalertView];
              
              
@@ -205,6 +209,11 @@
 }
 -(void)removeAlertViewFromCurrentVC:(UIButton *)sender{
     [myalertView removeFromSuperview];
+    if (self.navigationController.viewControllers.count>=2) {
+        [self.navigationController pushViewController:self.navigationController.viewControllers[2] animated:YES];
+
+    }
+    
     //pop到需要的页面
 }
 

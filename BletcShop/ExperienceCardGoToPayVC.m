@@ -11,11 +11,20 @@
 #import "AccessCodeVC.h"
 #import "ChangePayPassVC.h"
 #import "PayVictoryVC.h"
-@interface ExperienceCardGoToPayVC ()<PayCustomViewDelegate,UIAlertViewDelegate>
+#import "HGDQQRCodeView.h"
+@interface ExperienceCardGoToPayVC ()<PayCustomViewDelegate,UIAlertViewDelegate,UIScrollViewDelegate>
 {
     PayCustomView * Payview;
 
+    LZDButton *oldBtn;
+    UIView *topView;
 }
+@property (strong, nonatomic) IBOutlet UIView *twoBackView;
+@property (nonatomic,strong)  UIView *QRView;
+
+@property(nonatomic,strong) UIView *lineView;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollViewBackView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *scrollviewContentWidth;
 @property (weak, nonatomic) IBOutlet UIButton *sureBtn;
 @property (weak, nonatomic) IBOutlet UILabel *card_des;//价格
 
@@ -28,10 +37,69 @@
     self.navigationItem.title = @"体验卡支付";
     LEFTBACK
     self.card_des.text = [NSString stringWithFormat:@"¥:%@",_card_dic[@"price"]];
+    self.scrollviewContentWidth.constant = SCREENWIDTH*2;
+
     
+    topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 46)];
+    topView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:topView];
     
-//    [self goToPayClick:self.sureBtn];
+    for (int i = 0; i <2; i ++) {
+        LZDButton *btn = [LZDButton creatLZDButton];
+        btn.frame = CGRectMake(i*SCREENWIDTH/2, 0, SCREENWIDTH/2, topView.height);
+        btn.tag = i+99;
+        btn.titleLabel.font = [UIFont systemFontOfSize:16];
+        [topView addSubview:btn];
+        
+        
+        
+        
+        if (btn.tag==0+99) {
+            oldBtn = btn;
+            [btn setTitle:@"直接付款" forState:0];
+            [btn setTitleColor:RGB(237,72,77) forState:0];
+            
+            UIView *lineView = [[UIView alloc]init];
+            lineView.tag =1000;
+            lineView.backgroundColor =RGB(237,72,77);
+            lineView.bounds = CGRectMake(0, 0, 81, 1);
+            lineView.center = CGPointMake(btn.center.x, btn.center.y+btn.height/2-1);
+            [topView addSubview:lineView];
+            self.lineView = lineView;
+            
+        }else{
+            [btn setTitle:@"二维码付款" forState:0];
+            [btn setTitleColor:RGB(51,51,51) forState:0];
+        }
+        
+        
+        btn.block = ^(LZDButton *sender) {
+            
+            
+            _scrollViewBackView.contentOffset = CGPointMake((sender.tag-99)*SCREENWIDTH, 0);
+            
+            if (sender!=oldBtn) {
+                
+                if (sender.tag ==1+99) {
+                    [self.view endEditing:YES];
+                    
+                }
+                
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.lineView.center = CGPointMake(sender.center.x, sender.center.y+sender.height/2-1);
+                    [sender setTitleColor:RGB(237,72,77) forState:0];
+                    [oldBtn setTitleColor:RGB(51,51,51) forState:0];
+                }];
+                
+                
+                oldBtn = sender;
+            }
+            
+        };
+        
+    }
     
+    [self creatCodeView];
 
 }
 - (IBAction)goToPayClick:(id)sender {
@@ -189,4 +257,138 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [Payview removeFromSuperview];
 }
+
+
+-(void)creatCodeView{
+    
+    
+    
+    
+    
+    UIView *whiteview = [[UIView  alloc]initWithFrame:CGRectMake(13, 10, SCREENWIDTH-26, SCREENWIDTH-26)];
+    whiteview.backgroundColor = [UIColor whiteColor];
+    whiteview.layer.cornerRadius =6;
+    [_twoBackView addSubview:whiteview];
+    
+    
+    UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 31, whiteview.width, 14)];
+    titleLab.text = @"向商家付款";
+    titleLab.textAlignment= NSTextAlignmentCenter;
+    titleLab.textColor = RGB(51,51,51);
+    titleLab.font = [UIFont systemFontOfSize:15];
+    [whiteview addSubview:titleLab];
+    
+    
+    self.QRView = [[UIView alloc]initWithFrame:CGRectMake(88, titleLab.bottom+30, whiteview.width-88*2, whiteview.width-88*2)];
+    [whiteview addSubview:_QRView];
+    NSString *codeString =  @"creatQRCodeWithURLString:self.codeString superView:self.QRView logoImage:[UIImage";
+    
+    AppDelegate*  appdelegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    NSString *string=[NSString stringWithFormat:@"%@%@",HEADIMAGE,[appdelegate.userInfoDic objectForKey:@"headimage"]];
+    
+    
+    
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSURL * nurl1=[NSURL URLWithString:[string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+        UIImage *img=  [UIImage imageWithData:[NSData dataWithContentsOfURL:nurl1]];
+        
+       img = [NSString setThumbnailFromImage:img];
+    
+        if (!img) {
+            img = [UIImage imageNamed:@"app_icon3"];
+        }
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+           
+            [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:img logoImageSize:CGSizeMake(_QRView.width*0.4, _QRView.width*0.4) logoImageWithCornerRadius:10];
+        });
+        
+    }) ;
+    
+    
+
+    
+    
+    UILabel *title_lab_1 = [[UILabel alloc]initWithFrame:CGRectMake(0, 31+self.QRView.bottom, whiteview.width, 16)];
+    title_lab_1.text = @"体验金额";
+    title_lab_1.textAlignment= NSTextAlignmentCenter;
+    title_lab_1.textColor = RGB(51,51,51);
+    title_lab_1.font = [UIFont systemFontOfSize:15];
+    [whiteview addSubview:title_lab_1];
+    
+    
+    UILabel *title_lab_2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 31+title_lab_1.bottom, whiteview.width, 15)];
+    title_lab_2.text = [NSString stringWithFormat:@"¥:%@",self.card_dic[@"price"]];
+    title_lab_2.textAlignment= NSTextAlignmentCenter;
+    title_lab_2.textColor = RGB(51,51,51);
+    title_lab_2.font = [UIFont boldSystemFontOfSize:20];
+    [whiteview addSubview:title_lab_2];
+    
+    
+    
+    UIView *topline = [[UIView alloc]initWithFrame:CGRectMake(0, title_lab_2.bottom+30, whiteview.width, 1)];
+    topline.backgroundColor = RGB(220,220,220);
+    [whiteview addSubview:topline];
+    
+    
+    UILabel *title_lab_3 = [[UILabel alloc]initWithFrame:CGRectMake(0, 20+topline.bottom, whiteview.width, 13)];
+    title_lab_3.text = @"温馨提示：体验卡为一次性体验使用";
+    title_lab_3.textAlignment= NSTextAlignmentCenter;
+    title_lab_3.textColor = RGB(153,153,153);
+    title_lab_3.font = [UIFont systemFontOfSize:14];
+    [whiteview addSubview:title_lab_3];
+    
+    
+    
+    
+  
+    
+    
+    CGRect frame = whiteview.frame;
+    frame.size.height = title_lab_3.bottom+21;
+    whiteview.frame = frame;
+
+    
+    
+    
+    
+    
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    NSLog(@"--%lf",scrollView.contentOffset.x);
+    
+    [self.view endEditing:YES];
+    
+    NSInteger tag =scrollView.contentOffset.x/SCREENWIDTH+99;
+    
+    
+    
+    LZDButton *btn = (LZDButton*)[topView viewWithTag:tag];
+    
+    if (btn !=oldBtn) {
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.lineView.center = CGPointMake(btn.center.x, btn.center.y+btn.height/2-1);
+            [btn setTitleColor:RGB(237,72,77) forState:0];
+            [oldBtn setTitleColor:RGB(51,51,51) forState:0];
+        }];
+        
+        oldBtn = btn;
+
+    }
+    
+    
+    
+   
+    
+    
+    
+    
+}
+
 @end

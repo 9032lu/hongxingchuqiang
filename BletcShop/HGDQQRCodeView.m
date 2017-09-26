@@ -36,6 +36,8 @@
             cornerRadius = 0;
             NSLog(@"cornerRadius 不能小于0");
         }
+        
+
         qrImage = [QRCodeView addImageToSuperImage:qrImage withSubImage:[QRCodeView imageWithCornerRadius:cornerRadius image:logoImage] andSubImagePosition:CGRectMake((superView.frame.size.width - logoImageSize.width)/2, (superView.frame.size.height - logoImageSize.height)/2, logoImageSize.width, logoImageSize.height)]; // 增加logo
     }
     QRCodeView.layer.contents = (__bridge id)qrImage.CGImage;
@@ -128,6 +130,10 @@
     UIGraphicsBeginImageContextWithOptions(image.size, NO, 1.0);
     [[UIBezierPath bezierPathWithRoundedRect:frame
                                 cornerRadius:cornerRadius] addClip];
+    
+    NSLog(@"cornerRadius =%lf==%@",cornerRadius,NSStringFromCGSize(image.size));
+
+    
     // 画图
     [image drawInRect:frame];
     // 获取新的图片

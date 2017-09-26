@@ -14,11 +14,22 @@
 #import "UIImageView+WebCache.h"
 #import "ChangePayPassVC.h"
 #import "PayVictoryVC.h"
-@interface MealCardPayVC ()<UITableViewDelegate,UITableViewDataSource,PayCustomViewDelegate,UIAlertViewDelegate>
+#import "HGDQQRCodeView.h"
+#import "ChosePayMealVC.h"
+
+@interface MealCardPayVC ()<UITableViewDelegate,UITableViewDataSource,PayCustomViewDelegate,UIAlertViewDelegate,UIScrollViewDelegate>
 {
     NSInteger selectRow;
     PayCustomView * Payview;
+    LZDButton *oldBtn;
+    UIView *topView;
 }
+@property (strong, nonatomic) IBOutlet UIView *twoBackView;
+@property (nonatomic,strong)  UIView *QRView;
+
+@property(nonatomic,strong) UIView *lineView;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrollViewBackView;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *scrollviewContentWidth;
 @property (weak, nonatomic) IBOutlet UITableView *table_view;
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 
@@ -31,12 +42,77 @@
     [super viewDidLoad];
     self.navigationItem.title = @"套餐卡支付";
     LEFTBACK
+    self.scrollviewContentWidth.constant = SCREENWIDTH*2;
+    
     selectRow = -1;
     self.table_view.tableHeaderView = self.headerView;
     self.table_view.estimatedRowHeight = 100;
     self.table_view.rowHeight = UITableViewAutomaticDimension;
     
     [self getDataPost];
+    
+    
+    
+    topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 46)];
+    topView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:topView];
+    
+    for (int i = 0; i <2; i ++) {
+        LZDButton *btn = [LZDButton creatLZDButton];
+        btn.frame = CGRectMake(i*SCREENWIDTH/2, 0, SCREENWIDTH/2, topView.height);
+        btn.tag = i+99;
+        btn.titleLabel.font = [UIFont systemFontOfSize:16];
+        [topView addSubview:btn];
+        
+        
+        
+        
+        if (btn.tag==0+99) {
+            oldBtn = btn;
+            [btn setTitle:@"直接付款" forState:0];
+            [btn setTitleColor:RGB(237,72,77) forState:0];
+            
+            UIView *lineView = [[UIView alloc]init];
+            lineView.tag =1000;
+            lineView.backgroundColor =RGB(237,72,77);
+            lineView.bounds = CGRectMake(0, 0, 81, 1);
+            lineView.center = CGPointMake(btn.center.x, btn.center.y+btn.height/2-1);
+            [topView addSubview:lineView];
+            self.lineView = lineView;
+            
+        }else{
+            [btn setTitle:@"二维码付款" forState:0];
+            [btn setTitleColor:RGB(51,51,51) forState:0];
+        }
+        
+        
+        btn.block = ^(LZDButton *sender) {
+            
+            
+            _scrollViewBackView.contentOffset = CGPointMake((sender.tag-99)*SCREENWIDTH, 0);
+            
+            if (sender!=oldBtn) {
+                
+                if (sender.tag ==1+99) {
+                    [self.view endEditing:YES];
+                    
+                }
+                
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.lineView.center = CGPointMake(sender.center.x, sender.center.y+sender.height/2-1);
+                    [sender setTitleColor:RGB(237,72,77) forState:0];
+                    [oldBtn setTitleColor:RGB(51,51,51) forState:0];
+                }];
+                
+                
+                oldBtn = sender;
+            }
+            
+        };
+        
+    }
+    
+    [self creatCodeView];
 }
 
 
@@ -291,4 +367,191 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [Payview removeFromSuperview];
 }
+
+
+-(void)creatCodeView{
+    
+    
+    
+    
+    
+    UIView *whiteview = [[UIView  alloc]initWithFrame:CGRectMake(13, 10, SCREENWIDTH-26, SCREENWIDTH-26)];
+    whiteview.backgroundColor = [UIColor whiteColor];
+    whiteview.layer.cornerRadius =6;
+    [_twoBackView addSubview:whiteview];
+    
+    
+    UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 31, whiteview.width, 14)];
+    titleLab.text = @"向商家付款";
+    titleLab.textAlignment= NSTextAlignmentCenter;
+    titleLab.textColor = RGB(51,51,51);
+    titleLab.font = [UIFont systemFontOfSize:15];
+    [whiteview addSubview:titleLab];
+    
+    
+    self.QRView = [[UIView alloc]initWithFrame:CGRectMake(88, titleLab.bottom+30, whiteview.width-88*2, whiteview.width-88*2)];
+    [whiteview addSubview:_QRView];
+    NSString *codeString =  @"creatQRCodeWithURLString:self.codeString superView:self.QRView logoImage:[UIImage";
+    
+    AppDelegate*  appdelegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    NSString *string=[NSString stringWithFormat:@"%@%@",HEADIMAGE,[appdelegate.userInfoDic objectForKey:@"headimage"]];
+    
+    
+    
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSURL * nurl1=[NSURL URLWithString:[string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+        UIImage *img=  [UIImage imageWithData:[NSData dataWithContentsOfURL:nurl1]];
+        
+        img = [NSString setThumbnailFromImage:img];
+        
+        if (!img) {
+            img = [UIImage imageNamed:@"app_icon3"];
+        }
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:img logoImageSize:CGSizeMake(_QRView.width*0.4, _QRView.width*0.4) logoImageWithCornerRadius:10];
+        });
+        
+    }) ;
+    
+    
+    UIView *topline = [[UIView alloc]initWithFrame:CGRectMake(0, self.QRView.bottom+30, whiteview.width, 1)];
+    topline.backgroundColor = RGB(220,220,220);
+    [whiteview addSubview:topline];
+    
+    
+    UIScrollView *contentScrollView = [[UIScrollView alloc]init];
+    [whiteview addSubview:contentScrollView];
+    
+
+    LZDButton *btn = [LZDButton creatLZDButton];
+    
+    btn.frame = CGRectMake(0, topline.bottom, whiteview.width, 100);
+    
+    [btn setTitle:@"选择消费套餐" forState:0];
+    [btn setTitleColor:RGB(51,51,51) forState:0];
+    btn.titleLabel.font = [UIFont systemFontOfSize:15];
+    [whiteview addSubview:btn];
+    
+    btn.block = ^(LZDButton *sender) {
+        
+        for (UIView *view in contentScrollView.subviews) {
+            [view removeFromSuperview];
+        }
+        
+        sender.frame = CGRectMake(0, topline.bottom, whiteview.width, 100);
+        [sender setTitle:@"选择消费套餐" forState:0];
+
+        contentScrollView.frame = CGRectMake(0, topline.bottom, whiteview.width, 0);
+
+        CGRect frame = whiteview.frame;
+        frame.size.height = btn.bottom;
+        whiteview.frame = frame;
+        
+        PUSH(ChosePayMealVC)
+        vc.card_dic = _card_dic;
+        vc.sendValueBlock = ^(NSArray *arr) {
+            
+            
+            [sender setTitle:@"重置消费套餐" forState:0];
+
+
+           
+            
+            for (NSInteger i = 0; i < arr.count; i ++) {
+                NSDictionary *dic = arr[i];
+               
+                UIView *back_v = [[UIView alloc]initWithFrame:CGRectMake(0, i*50, whiteview.width, 50)];
+                [contentScrollView addSubview:back_v];
+                UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, back_v.height-1, back_v.width, 1)];
+                line.backgroundColor = RGB(220,220,220);
+                [back_v addSubview:line];
+                
+                
+                UIImageView *imgView = [[UIImageView alloc]initWithFrame:CGRectMake(40, 10, 30, 30)];
+                
+                [back_v addSubview:imgView];
+                NSURL * nurl1=[[NSURL alloc] initWithString:[[NSString stringWithFormat:@"%@%@",PRODUCT_IMAGE,dic[@"image"]] stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+                [imgView sd_setImageWithURL:nurl1 placeholderImage:[UIImage imageNamed:@"icon3.png"] options:SDWebImageRetryFailed];
+                
+                
+                UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(imgView.right+10, imgView.top, whiteview.width-(imgView.right+10), imgView.height)];
+                title.textColor = RGB(51,51,51);
+                title.font = [UIFont systemFontOfSize:13];
+                title.text = [NSString stringWithFormat:@"%@",dic[@"name"]];
+                [back_v addSubview:title];
+                
+                
+                
+                contentScrollView.contentSize = CGSizeMake(0, back_v.bottom);
+                
+                CGFloat h = SCREENHEIGHT -topline.bottom- 10-45-64-50-10;
+                
+                
+                contentScrollView.frame = CGRectMake(0, topline.bottom, whiteview.width, MIN(h, back_v.bottom));
+                
+                
+                sender.frame = CGRectMake(0, contentScrollView.bottom, whiteview.width, 50);
+                
+                CGRect frame = whiteview.frame;
+                frame.size.height = sender.bottom;
+                whiteview.frame = frame;
+                
+            }
+            
+            
+        };
+        
+        
+    };
+    
+    
+    CGRect frame = whiteview.frame;
+    frame.size.height = btn.bottom;
+    whiteview.frame = frame;
+   
+    
+        
+  
+    
+    
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    NSLog(@"--%lf",scrollView.contentOffset.x);
+    
+    [self.view endEditing:YES];
+    
+    NSInteger tag =scrollView.contentOffset.x/SCREENWIDTH+99;
+    
+    
+    
+    LZDButton *btn = (LZDButton*)[topView viewWithTag:tag];
+    
+    if (btn !=oldBtn) {
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.lineView.center = CGPointMake(btn.center.x, btn.center.y+btn.height/2-1);
+            [btn setTitleColor:RGB(237,72,77) forState:0];
+            [oldBtn setTitleColor:RGB(51,51,51) forState:0];
+        }];
+        
+        oldBtn = btn;
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
 @end

@@ -798,6 +798,11 @@
 		D9A06B641D8679C30037795B /* libopencore-amrnb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A06B551D8679C30037795B /* libopencore-amrnb.a */; };
 		D9A06B651D8679C30037795B /* libopencore-amrwb.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A06B591D8679C30037795B /* libopencore-amrwb.a */; };
 		D9A06B681D86A73B0037795B /* ToolManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A06B671D86A73B0037795B /* ToolManager.m */; };
+		D9A32B9D1F78C63F00E0F280 /* MoneyPaySetMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A32B9B1F78C63F00E0F280 /* MoneyPaySetMoneyVC.m */; };
+		D9A32B9E1F78C63F00E0F280 /* MoneyPaySetMoneyVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9A32B9C1F78C63F00E0F280 /* MoneyPaySetMoneyVC.xib */; };
+		D9A32BA21F78EA5600E0F280 /* ChosePayMealVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A32BA01F78EA5600E0F280 /* ChosePayMealVC.m */; };
+		D9A32BA31F78EA5600E0F280 /* ChosePayMealVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9A32BA11F78EA5600E0F280 /* ChosePayMealVC.xib */; };
+		D9A32BE61F79FFC100E0F280 /* libbaiduNaviSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A32BE51F79FF5400E0F280 /* libbaiduNaviSDK.a */; };
 		D9A33E631F5E373E00304F83 /* OilCardRechargeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A33E621F5E373E00304F83 /* OilCardRechargeVC.m */; };
 		D9A33E661F5E37CE00304F83 /* OilCardPayMentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A33E651F5E37CE00304F83 /* OilCardPayMentVC.m */; };
 		D9A33E6A1F5E3DCA00304F83 /* OilCardShareVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A33E681F5E3DCA00304F83 /* OilCardShareVC.m */; };
@@ -899,7 +904,6 @@
 		D9B8940A1F6239F200278B74 /* BaiduMapViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = D9B894091F6239F200278B74 /* BaiduMapViewController.mm */; };
 		D9B8940E1F624AB300278B74 /* 组-4-拷贝-5@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B8940C1F624AB300278B74 /* 组-4-拷贝-5@3x.png */; };
 		D9B8940F1F624AB300278B74 /* 组-4-拷贝-5@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9B8940D1F624AB300278B74 /* 组-4-拷贝-5@2x.png */; };
-		D9B894151F6622FA00278B74 /* libbaiduNaviSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9B894141F6622FA00278B74 /* libbaiduNaviSDK.a */; };
 		D9B9231D1F26D447003AA113 /* CardmarketDetailVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B9231C1F26D447003AA113 /* CardmarketDetailVC.xib */; };
 		D9B923221F271E32003AA113 /* AroundViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D9B923201F271E32003AA113 /* AroundViewController.m */; };
 		D9B923231F271E32003AA113 /* AroundViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9B923211F271E32003AA113 /* AroundViewController.xib */; };
@@ -2291,6 +2295,13 @@
 		D9A06B591D8679C30037795B /* libopencore-amrwb.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libopencore-amrwb.a"; sourceTree = "<group>"; };
 		D9A06B661D86A73B0037795B /* ToolManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolManager.h; sourceTree = "<group>"; };
 		D9A06B671D86A73B0037795B /* ToolManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolManager.m; sourceTree = "<group>"; };
+		D9A32B9A1F78C63F00E0F280 /* MoneyPaySetMoneyVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MoneyPaySetMoneyVC.h; sourceTree = "<group>"; };
+		D9A32B9B1F78C63F00E0F280 /* MoneyPaySetMoneyVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MoneyPaySetMoneyVC.m; sourceTree = "<group>"; };
+		D9A32B9C1F78C63F00E0F280 /* MoneyPaySetMoneyVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MoneyPaySetMoneyVC.xib; sourceTree = "<group>"; };
+		D9A32B9F1F78EA5600E0F280 /* ChosePayMealVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChosePayMealVC.h; sourceTree = "<group>"; };
+		D9A32BA01F78EA5600E0F280 /* ChosePayMealVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChosePayMealVC.m; sourceTree = "<group>"; };
+		D9A32BA11F78EA5600E0F280 /* ChosePayMealVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChosePayMealVC.xib; sourceTree = "<group>"; };
+		D9A32BE51F79FF5400E0F280 /* libbaiduNaviSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaiduNaviSDK.a; sourceTree = "<group>"; };
 		D9A33E611F5E373E00304F83 /* OilCardRechargeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OilCardRechargeVC.h; sourceTree = "<group>"; };
 		D9A33E621F5E373E00304F83 /* OilCardRechargeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OilCardRechargeVC.m; sourceTree = "<group>"; };
 		D9A33E641F5E37CE00304F83 /* OilCardPayMentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OilCardPayMentVC.h; sourceTree = "<group>"; };
@@ -2464,7 +2475,6 @@
 		D9B894091F6239F200278B74 /* BaiduMapViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = BaiduMapViewController.mm; sourceTree = "<group>"; };
 		D9B8940C1F624AB300278B74 /* 组-4-拷贝-5@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-4-拷贝-5@3x.png"; sourceTree = "<group>"; };
 		D9B8940D1F624AB300278B74 /* 组-4-拷贝-5@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "组-4-拷贝-5@2x.png"; sourceTree = "<group>"; };
-		D9B894141F6622FA00278B74 /* libbaiduNaviSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaiduNaviSDK.a; sourceTree = "<group>"; };
 		D9B9231C1F26D447003AA113 /* CardmarketDetailVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CardmarketDetailVC.xib; sourceTree = "<group>"; };
 		D9B9231F1F271E32003AA113 /* AroundViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AroundViewController.h; sourceTree = "<group>"; };
 		D9B923201F271E32003AA113 /* AroundViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AroundViewController.m; sourceTree = "<group>"; };
@@ -2664,7 +2674,7 @@
 				D94113541CE9A3D7008E231F /* AlipaySDK.framework in Frameworks */,
 				D94DF2661CAE6C7A000D5B69 /* CIA_SDK.framework in Frameworks */,
 				D94743A51CE5728000D1D3EE /* BaiduMapAPI_Search.framework in Frameworks */,
-				D9B894151F6622FA00278B74 /* libbaiduNaviSDK.a in Frameworks */,
+				D9A32BE61F79FFC100E0F280 /* libbaiduNaviSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -4177,7 +4187,7 @@
 		D90C4CCE1F612C0900B7E08A /* BaiduNaviSDK */ = {
 			isa = PBXGroup;
 			children = (
-				D9B894141F6622FA00278B74 /* libbaiduNaviSDK.a */,
+				D9A32BE51F79FF5400E0F280 /* libbaiduNaviSDK.a */,
 				D90C4CCF1F612C0900B7E08A /* baiduNaviSDK.bundle */,
 				D90C4CD01F612C0900B7E08A /* baiduNaviSDK.xcassets */,
 				D90C4CD11F612C0900B7E08A /* inc */,
@@ -5414,6 +5424,9 @@
 				D9AA10B61F023BCA00F7EDE8 /* MealCardPayVC.h */,
 				D9AA10B71F023BCA00F7EDE8 /* MealCardPayVC.m */,
 				D9AA10B81F023BCA00F7EDE8 /* MealCardPayVC.xib */,
+				D9A32B9F1F78EA5600E0F280 /* ChosePayMealVC.h */,
+				D9A32BA01F78EA5600E0F280 /* ChosePayMealVC.m */,
+				D9A32BA11F78EA5600E0F280 /* ChosePayMealVC.xib */,
 			);
 			name = "套餐卡支付";
 			sourceTree = "<group>";
@@ -5423,6 +5436,9 @@
 			children = (
 				18F4CD451D6FD6BD008FBAD1 /* MoneyPAYViewController.h */,
 				18F4CD461D6FD6BD008FBAD1 /* MoneyPAYViewController.m */,
+				D9A32B9A1F78C63F00E0F280 /* MoneyPaySetMoneyVC.h */,
+				D9A32B9B1F78C63F00E0F280 /* MoneyPaySetMoneyVC.m */,
+				D9A32B9C1F78C63F00E0F280 /* MoneyPaySetMoneyVC.xib */,
 			);
 			name = "储值卡支付";
 			sourceTree = "<group>";
@@ -6200,6 +6216,7 @@
 				1C9E822C1C603B7A0007BF02 /* arraw_left@2x.png in Resources */,
 				D94DF25F1CAE0DB8000D5B69 /* result_small_star_disable.png in Resources */,
 				18B139AB1F3066D000283CED /* PayVictoryVC.xib in Resources */,
+				D9A32B9E1F78C63F00E0F280 /* MoneyPaySetMoneyVC.xib in Resources */,
 				189899F71F3AC0E8004D1543 /* oil4.jpg in Resources */,
 				18F27EEA1D640E84002DD03A /* 头像-2.png in Resources */,
 				D9824F631F188E2200301076 /* CardManagerViewController.xib in Resources */,
@@ -6317,6 +6334,7 @@
 				1C2ED1211C5B5868003EE93B /* 3-02(1)@2x.png in Resources */,
 				D9637DFE1D59BAF900C19D0B /* admin_pp.png in Resources */,
 				D9955C6F1D489FCA00E1BF57 /* checkbox_yes.png in Resources */,
+				D9A32BA31F78EA5600E0F280 /* ChosePayMealVC.xib in Resources */,
 				1C8F702B1C75B0EA00F7D9B4 /* gouxuan@.png in Resources */,
 				188372451F2748270076D2D8 /* HobbyChooseVC.xib in Resources */,
 				D9C7B2C51F555BEC00406BC9 /* awpp启动页2.png in Resources */,
@@ -6550,6 +6568,7 @@
 				D922DA0F1CED5ED0007AE4DE /* OrderViewController.m in Sources */,
 				185A458C1F132F2A0033AFE3 /* UserInfoCell.m in Sources */,
 				18EDCF701D46039D004C40B7 /* NSString+Addition.m in Sources */,
+				D9A32BA21F78EA5600E0F280 /* ChosePayMealVC.m in Sources */,
 				D986A1C71DE57849007B798B /* PaySuccessVc.m in Sources */,
 				D95A87711E728AE000BDAC75 /* JFCityViewController.m in Sources */,
 				D93BE8671CFD6B6300000E0D /* FavorateViewController.m in Sources */,
@@ -6645,6 +6664,7 @@
 				1CB53C191C573BA7002B6CC1 /* CardVipCell.m in Sources */,
 				D9C4CDEA1DE4161E009C76C1 /* MyOrderDetailVC.m in Sources */,
 				D9DEED261CACED7C00ACDD00 /* UIImage+MultiFormat.m in Sources */,
+				D9A32B9D1F78C63F00E0F280 /* MoneyPaySetMoneyVC.m in Sources */,
 				D947E44A1D7D0AB900F9FEE8 /* ChatGroupDetailViewController.m in Sources */,
 				D9B3A4A41D73D6A900F3F27E /* LZDRootController.m in Sources */,
 				D990FF041E7B773B00BF7E40 /* IntegralMallViewController.m in Sources */,

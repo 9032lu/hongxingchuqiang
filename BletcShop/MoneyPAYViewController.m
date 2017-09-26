@@ -12,14 +12,27 @@
 #import "PayCustomView.h"
 #import "AccessCodeVC.h"
 #import "PayVictoryVC.h"
-@interface MoneyPAYViewController ()<UIAlertViewDelegate,PayCustomViewDelegate,UITextFieldDelegate>
+#import "HGDQQRCodeView.h"
+
+#import "MoneyPaySetMoneyVC.h"
+
+@interface MoneyPAYViewController ()<UIAlertViewDelegate,PayCustomViewDelegate,UITextFieldDelegate,UIScrollViewDelegate>
 {
     UITextField *textTF;
     PayCustomView *view;
     UILabel *discount;
     UILabel *realPay;
     UIView *bigView;
+    
+    LZDButton *oldBtn;
+    UIView *topView;
 }
+@property(nonatomic,strong) UIView *lineView;
+@property(nonatomic,strong) UIScrollView *scrollViewBackView;
+@property (nonatomic,strong)  UIView *QRView;
+@property (nonatomic,strong) UILabel *payMoney_lab;
+
+
 @end
 
 @implementation MoneyPAYViewController
@@ -30,9 +43,85 @@
     self.navigationItem.title=@"储值卡支付";
     LEFTBACK
     
-    bigView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64)];
+    topView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 46)];
+    topView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:topView];
+    
+    for (int i = 0; i <2; i ++) {
+        LZDButton *btn = [LZDButton creatLZDButton];
+        btn.frame = CGRectMake(i*SCREENWIDTH/2, 0, SCREENWIDTH/2, topView.height);
+        btn.tag = i+99;
+        btn.titleLabel.font = [UIFont systemFontOfSize:16];
+        [topView addSubview:btn];
+        
+        
+        
+        
+        if (btn.tag==0+99) {
+            oldBtn = btn;
+            [btn setTitle:@"直接付款" forState:0];
+            [btn setTitleColor:RGB(237,72,77) forState:0];
+            
+            UIView *lineView = [[UIView alloc]init];
+            lineView.tag =1000;
+            lineView.backgroundColor =RGB(237,72,77);
+            lineView.bounds = CGRectMake(0, 0, 81, 1);
+            lineView.center = CGPointMake(btn.center.x, btn.center.y+btn.height/2-1);
+            [topView addSubview:lineView];
+            self.lineView = lineView;
+            
+        }else{
+            [btn setTitle:@"二维码付款" forState:0];
+            [btn setTitleColor:RGB(51,51,51) forState:0];
+        }
+        
+        
+        btn.block = ^(LZDButton *sender) {
+            
+            
+            _scrollViewBackView.contentOffset = CGPointMake((sender.tag-99)*SCREENWIDTH, 0);
+            
+            if (sender!=oldBtn) {
+                
+                if (sender.tag ==1+99) {
+                    [self.view endEditing:YES];
+
+                }
+                
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.lineView.center = CGPointMake(sender.center.x, sender.center.y+sender.height/2-1);
+                    [sender setTitleColor:RGB(237,72,77) forState:0];
+                    [oldBtn setTitleColor:RGB(51,51,51) forState:0];
+                }];
+               
+
+                oldBtn = sender;
+            }
+            
+        };
+        
+    }
+    
+    
+    
+    UIScrollView *scrollView =[[UIScrollView alloc]initWithFrame:CGRectMake(0, topView.bottom, SCREENWIDTH, SCREENHEIGHT-64-topView.height)];
+    
+    scrollView.delegate = self;
+    scrollView.pagingEnabled = YES;
+    scrollView.showsHorizontalScrollIndicator= NO;
+    
+    scrollView.contentSize = CGSizeMake(SCREENWIDTH*2, 0);
+    
+    [self.view addSubview:scrollView];
+    
+    self.scrollViewBackView = scrollView;
+    
+    
+    [self creatCodeView];
+    
+    bigView=[[UIView alloc]initWithFrame:CGRectMake(0, 1, SCREENWIDTH, scrollView.height-1)];
     bigView.backgroundColor=RGB(234, 234, 234);
-    [self.view addSubview:bigView];
+    [scrollView addSubview:bigView];
     
     UIView *backView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, 113)];
     backView.backgroundColor = [UIColor whiteColor];
@@ -134,7 +223,7 @@
     
     
     UIButton *button=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    button.frame=CGRectMake(0, SCREENHEIGHT-64-44, SCREENWIDTH, 44);
+    button.frame=CGRectMake(0, bigView.height-44, SCREENWIDTH, 44);
     button.backgroundColor=NavBackGroundColor;
     [button setTitle:@"确认支付" forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -166,7 +255,7 @@
             
         }else{
             
-             bigView.frame=CGRectMake(0, -113, SCREENWIDTH, SCREENHEIGHT-64);
+             bigView.frame=CGRectMake(0, -230, SCREENWIDTH, _scrollViewBackView.height-1);
             
             view=[[PayCustomView alloc]initWithFrame:CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT)];
             view.delegate=self;
@@ -374,7 +463,7 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
     [view removeFromSuperview];
-    bigView.frame=CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64);
+    bigView.frame=CGRectMake(0, 1, SCREENWIDTH, _scrollViewBackView.height-1);
 }
 
 -(void)confirmPassRightOrWrong:(NSString *)pass{
@@ -409,6 +498,151 @@
     return YES;
 }
 -(void)missPayAlert{
-    bigView.frame=CGRectMake(0, 0, SCREENWIDTH, SCREENHEIGHT-64);
+    bigView.frame=CGRectMake(0, 1, SCREENWIDTH, _scrollViewBackView.height-1);
 }
+
+
+-(void)creatCodeView{
+    
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(SCREENWIDTH, 0, _scrollViewBackView.width, _scrollViewBackView.height)];
+    view.backgroundColor = RGB(220,220,220);
+    [_scrollViewBackView addSubview:view];
+    
+    
+    UIView *whiteview = [[UIView  alloc]initWithFrame:CGRectMake(13, 10, view.width-26, view.width-26)];
+    whiteview.backgroundColor = [UIColor whiteColor];
+    whiteview.layer.cornerRadius =6;
+    [view addSubview:whiteview];
+    
+    
+    UILabel *titleLab = [[UILabel alloc]initWithFrame:CGRectMake(0, 31, whiteview.width, 14)];
+    titleLab.text = @"向商家付款";
+    titleLab.textAlignment= NSTextAlignmentCenter;
+    titleLab.textColor = RGB(51,51,51);
+    titleLab.font = [UIFont systemFontOfSize:15];
+    [whiteview addSubview:titleLab];
+    
+    
+    self.QRView = [[UIView alloc]initWithFrame:CGRectMake(88, titleLab.bottom+30, whiteview.width-88*2, whiteview.width-88*2)];
+    [whiteview addSubview:_QRView];
+    NSString *codeString =  @"creatQRCodeWithURLString:self.codeString superView:self.QRView logoImage:[UIImage";
+    
+    AppDelegate*  appdelegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
+    
+    NSString *string=[NSString stringWithFormat:@"%@%@",HEADIMAGE,[appdelegate.userInfoDic objectForKey:@"headimage"]];
+    
+    
+    
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSURL * nurl1=[NSURL URLWithString:[string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+        UIImage *img=  [UIImage imageWithData:[NSData dataWithContentsOfURL:nurl1]];
+        
+        img = [NSString setThumbnailFromImage:img];
+        
+        if (!img) {
+            img = [UIImage imageNamed:@"app_icon3"];
+        }
+        
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:img logoImageSize:CGSizeMake(_QRView.width*0.4, _QRView.width*0.4) logoImageWithCornerRadius:10];
+        });
+        
+    }) ;
+    
+    
+    UILabel *payMoney_lab = [[UILabel alloc]initWithFrame:CGRectMake(0, _QRView.bottom+30, whiteview.width, 16)];
+    payMoney_lab.textColor = RGB(51,51,51);
+    payMoney_lab.textAlignment = NSTextAlignmentCenter;
+    payMoney_lab.font = [UIFont systemFontOfSize:19];
+    payMoney_lab.text = @"";
+    [whiteview addSubview:payMoney_lab];
+    
+    self.payMoney_lab = payMoney_lab;
+    
+    for (int i = 0; i <2; i ++) {
+        
+        LZDButton *btn = [LZDButton creatLZDButton];
+        
+        btn.frame = CGRectMake(i*whiteview.width/2, payMoney_lab.bottom +40-13, whiteview.width/2, 40);
+        btn.titleLabel.font = [UIFont systemFontOfSize:15];
+        [btn setTitleColor:RGB(51,51,51) forState:0];
+        [whiteview addSubview:btn];
+        btn.tag =i;
+       
+        
+        if (i == 0) {
+            [btn setTitle:@"设置金额" forState:0];
+            
+            UIView *shuxina = [[UIView alloc]initWithFrame:CGRectMake(btn.right, btn.top+(btn.height-12)/2, 1, 12)];
+            shuxina.backgroundColor = RGB(220,220,220);
+            [whiteview addSubview:shuxina];
+            
+            CGRect frame = whiteview.frame;
+            frame.size.height = btn.bottom+18;
+            whiteview.frame = frame;
+            
+        }else{
+            NSString *rule = [NSString stringWithFormat:@"折扣力度:%@%%",_card_dic[@"rule"]];
+            [btn setTitle:rule forState:0];
+
+        }
+        
+        
+        btn.block = ^(LZDButton *sender) {
+            
+            if (sender.tag==0) {
+                PUSH(MoneyPaySetMoneyVC)
+                vc.remian = self.card_dic[@"card_remain"];
+                vc.sendMoneyBlock = ^(NSString *money) {
+                    
+                    [sender setTitle:@"重置金额" forState:0];
+
+                    self.payMoney_lab.text =[NSString stringWithFormat:@"¥%.2f",[money floatValue]*[_card_dic[@"rule"] floatValue]/100];
+                };
+            }
+        };
+        
+    }
+    
+    
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    NSLog(@"--%lf",scrollView.contentOffset.x);
+    
+    [self.view endEditing:YES];
+    
+    NSInteger tag =scrollView.contentOffset.x/SCREENWIDTH+99;
+    
+    
+    
+    LZDButton *btn = (LZDButton*)[topView viewWithTag:tag];
+    
+    if (btn !=oldBtn) {
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            self.lineView.center = CGPointMake(btn.center.x, btn.center.y+btn.height/2-1);
+            [btn setTitleColor:RGB(237,72,77) forState:0];
+            [oldBtn setTitleColor:RGB(51,51,51) forState:0];
+        }];
+        
+        oldBtn = btn;
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+}
+
+
+
 @end

@@ -41,6 +41,10 @@
 +(NSString*)getRandomCode;//随机字母数字组合,5~10位;
 
 
++ (UIImage*)setThumbnailFromImage:(UIImage*)image;//生成缩略图
+
+
+
 @end
 
 

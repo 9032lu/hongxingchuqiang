@@ -391,33 +391,9 @@
     
     self.QRView = [[UIView alloc]initWithFrame:CGRectMake(88, titleLab.bottom+30, whiteview.width-88*2, whiteview.width-88*2)];
     [whiteview addSubview:_QRView];
-    NSString *codeString =  @"creatQRCodeWithURLString:self.codeString superView:self.QRView logoImage:[UIImage";
     
-    AppDelegate*  appdelegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
+    [self creatQrCodeWithPayContent:nil];
     
-    NSString *string=[NSString stringWithFormat:@"%@%@",HEADIMAGE,[appdelegate.userInfoDic objectForKey:@"headimage"]];
-    
-    
-    
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        NSURL * nurl1=[NSURL URLWithString:[string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-        UIImage *img=  [UIImage imageWithData:[NSData dataWithContentsOfURL:nurl1]];
-        
-        img = [NSString setThumbnailFromImage:img];
-        
-        if (!img) {
-            img = [UIImage imageNamed:@"app_icon3"];
-        }
-        
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:img logoImageSize:CGSizeMake(_QRView.width*0.4, _QRView.width*0.4) logoImageWithCornerRadius:10];
-        });
-        
-    }) ;
     
     
     UIView *topline = [[UIView alloc]initWithFrame:CGRectMake(0, self.QRView.bottom+30, whiteview.width, 1)];
@@ -457,6 +433,8 @@
         vc.card_dic = _card_dic;
         vc.sendValueBlock = ^(NSArray *arr) {
             
+            [self creatQrCodeWithPayContent:arr[0]];
+
             
             [sender setTitle:@"重置消费套餐" forState:0];
 
@@ -544,14 +522,94 @@
         oldBtn = btn;
         
     }
+
+    
+}
+
+/*
+ 生成订单信息,生成二维码
+ **/
+-(void)creatQrCodeWithPayContent:(NSDictionary *)option_dic{
+    
+    NSString *url = [NSString stringWithFormat:@"%@MerchantType/gather/getQrcode",BASEURL];
+    
+    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     
     
+    NSMutableDictionary*muta_dic = [NSMutableDictionary dictionary];
+    [muta_dic setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
+    [muta_dic setValue:app.userInfoDic[@"nickname"] forKey:@"nickname"];
+    [muta_dic setValue:app.userInfoDic[@"headimage"] forKey:@"headimage"];
     
     
+    [muta_dic setValue:self.card_dic[@"merchant"] forKey:@"muid"];
+    [muta_dic setValue:self.card_dic[@"card_code"] forKey:@"code"];
+    [muta_dic setValue:option_dic[@"option_id"] forKey:@"option_id"];
+
+    [muta_dic setValue:option_dic[@"image"] forKey:@"option_image"];
+    [muta_dic setValue:option_dic[@"name"] forKey:@"option_name"];
+
+    [muta_dic setValue:@"meal_card" forKey:@"operate"];
+
     
+    NSMutableDictionary*paramer = [NSMutableDictionary dictionary];
+    [paramer setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
+    
+    [paramer setValue:[NSString dictionaryToJson:muta_dic] forKey:@"content"];
+    
+    
+    NSLog(@"======%@",paramer);
+    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        if ([result[@"result_code"] intValue]==1) {
+            
+            
+            NSMutableDictionary *m_dic = [NSMutableDictionary dictionary];
+            
+            [m_dic setValue:result[@"order_id"] forKey:@"order_id"];
+            
+            [m_dic setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
+            
+            NSString  *codeString = [NSString dictionaryToJson:m_dic];
+            
+            
+            NSString *string=[NSString stringWithFormat:@"%@%@",HEADIMAGE,[app.userInfoDic objectForKey:@"headimage"]];
+            
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                
+                NSURL * nurl1=[NSURL URLWithString:[string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+                UIImage *img=  [UIImage imageWithData:[NSData dataWithContentsOfURL:nurl1]];
+                
+                img = [NSString setThumbnailFromImage:img];
+                
+                if (!img) {
+                    img = [UIImage imageNamed:@"app_icon3"];
+                }
+                
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:img logoImageSize:CGSizeMake(_QRView.width*0.2, _QRView.width*0.2) logoImageWithCornerRadius:10];
+                });
+                
+            }) ;
+            
+            
+            
+        }
+        
+        NSLog(@"=result=====%@",result);
+        
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"=error=====%@",error);
+        
+    }];
     
     
     
 }
+
 
 @end

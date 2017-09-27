@@ -49,9 +49,12 @@
     [bgView addSubview:_QRView];
     
     NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:self.dic[@"uuid"],@"uuid",self.dic[@"coupon_id"],@"coupon_id", nil];
-    NSString *codeString = [NSString dictionaryToJson:infoDic];
+//    NSString *codeString = [NSString dictionaryToJson:infoDic];
 
-    [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:[UIImage imageNamed:@"app_icon3"] logoImageSize:CGSizeMake(SCREENWIDTH*0.1, SCREENWIDTH*0.1) logoImageWithCornerRadius:0];
+//    [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:[UIImage imageNamed:@"app_icon3"] logoImageSize:CGSizeMake(SCREENWIDTH*0.1, SCREENWIDTH*0.1) logoImageWithCornerRadius:0];
+    
+
+    [self creatQrCodeWithPayContent:infoDic];
     
     UILabel *notice=[[UILabel alloc]initWithFrame:CGRectMake((bgView.width-150)/2, self.QRView.bottom+20, 150, 30)];
     notice.textAlignment=NSTextAlignmentCenter;
@@ -166,6 +169,66 @@
     controller.title = @"商铺信息";
     [self.navigationController pushViewController:controller animated:YES];
 }
+
+
+/*
+ 生成订单信息,生成二维码
+ **/
+-(void)creatQrCodeWithPayContent:(NSDictionary *)option_dic{
+    
+    NSString *url = [NSString stringWithFormat:@"%@MerchantType/gather/getQrcode",BASEURL];
+    
+    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    
+    
+    NSMutableDictionary*muta_dic = [NSMutableDictionary dictionary];
+    [muta_dic setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
+    [muta_dic setValue:app.userInfoDic[@"nickname"] forKey:@"nickname"];
+    [muta_dic setValue:app.userInfoDic[@"headimage"] forKey:@"headimage"];
+    
+
+    
+    [muta_dic setValue:@"coupon" forKey:@"operate"];
+    
+    
+    NSMutableDictionary*paramer = [NSMutableDictionary dictionary];
+    [paramer setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
+    
+    [paramer setValue:[NSString dictionaryToJson:muta_dic] forKey:@"content"];
+    
+    
+    NSLog(@"======%@",paramer);
+    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        if ([result[@"result_code"] intValue]==1) {
+            
+            
+            NSMutableDictionary *m_dic = [NSMutableDictionary dictionary];
+            
+            [m_dic setValue:result[@"order_id"] forKey:@"order_id"];
+            
+            [m_dic setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
+            
+            NSString  *codeString = [NSString dictionaryToJson:m_dic];
+            
+            
+            [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:[UIImage imageNamed:@"app_icon3"] logoImageSize:CGSizeMake(SCREENWIDTH*0.1, SCREENWIDTH*0.1) logoImageWithCornerRadius:0];
+            
+        }
+            
+        
+        NSLog(@"=result=====%@",result);
+        
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"=error=====%@",error);
+        
+    }];
+    
+    
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

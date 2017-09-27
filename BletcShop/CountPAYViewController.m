@@ -115,7 +115,6 @@
     self.scrollViewBackView = scrollView;
     
     
-    [self creatCodeView];
     
     
     
@@ -128,6 +127,10 @@
     
     [_scrollViewBackView addSubview:onebackView];
     
+    
+    
+    [self creatCodeView];
+
     
     //修改
     UIView *bgView=[[UIView alloc]initWithFrame:CGRectMake(0, 10, SCREENWIDTH, 206)];
@@ -495,35 +498,8 @@
     self.QRView = [[UIView alloc]initWithFrame:CGRectMake(88, titleLab.bottom+30, whiteview.width-88*2, whiteview.width-88*2)];
     [whiteview addSubview:_QRView];
     
-    NSString *codeString =  @"creatQRCodeWithURLString:self.codeString superView:self.QRView logoImage:[UIImage";
-    
-    AppDelegate*  appdelegate=(AppDelegate *)[UIApplication sharedApplication].delegate;
-    
-    NSString *string=[NSString stringWithFormat:@"%@%@",HEADIMAGE,[appdelegate.userInfoDic objectForKey:@"headimage"]];
-    
-    
-    
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        NSURL * nurl1=[NSURL URLWithString:[string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-        UIImage *img=  [UIImage imageWithData:[NSData dataWithContentsOfURL:nurl1]];
-        
-        img = [NSString setThumbnailFromImage:img];
-        
-        if (!img) {
-            img = [UIImage imageNamed:@"app_icon3"];
-        }
-        
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.thumbnailImg = img;
-
-            [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:img logoImageSize:CGSizeMake(_QRView.width*0.4, _QRView.width*0.4) logoImageWithCornerRadius:10];
-        });
-        
-    }) ;
-    
+ 
+    [self creatQrCodeWithPayContent];
 
     
    
@@ -582,12 +558,8 @@
             _number_count--;
             countTF.text=[[NSString alloc]initWithFormat:@"%ld",_number_count];
             
-           long long int time = [[NSDate date] timeIntervalSince1970];
-            
-            NSString *codeString = [NSString stringWithFormat:@"creatQRCodeWithURLString:self.codeString superView:self.QRView logoImage:[UIImage%lld",time] ;
-            
-            
-            [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:self.thumbnailImg logoImageSize:CGSizeMake(_QRView.width*0.4, _QRView.width*0.4) logoImageWithCornerRadius:10];
+           
+            [self creatQrCodeWithPayContent];
             
         }
         
@@ -609,12 +581,8 @@
             _number_count++;
             countTF.text=[[NSString alloc]initWithFormat:@"%ld",_number_count];
             
-            long long int time = [[NSDate date] timeIntervalSince1970];
-            
-            NSString *codeString = [NSString stringWithFormat:@"creatQRCodeWithURLString:self.codeString superView:self.QRView logoImage:[UIImage%lld",time] ;
-            
-            
-            [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:self.thumbnailImg logoImageSize:CGSizeMake(_QRView.width*0.4, _QRView.width*0.4) logoImageWithCornerRadius:10];
+            [self creatQrCodeWithPayContent];
+
             
         }
         
@@ -660,5 +628,102 @@
     
 }
 
+
+/*
+ 生成订单信息,生成二维码
+ **/
+-(void)creatQrCodeWithPayContent{
+    
+    NSString *url = [NSString stringWithFormat:@"%@MerchantType/gather/getQrcode",BASEURL];
+    
+    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+    
+    
+    NSMutableDictionary*muta_dic = [NSMutableDictionary dictionary];
+    [muta_dic setObject:self.user forKey:@"uuid"];
+    [muta_dic setValue:app.userInfoDic[@"nickname"] forKey:@"nickname"];
+    [muta_dic setValue:app.userInfoDic[@"headimage"] forKey:@"headimage"];
+    
+    
+    [muta_dic setValue:self.card_dic[@"merchant"] forKey:@"muid"];
+    [muta_dic setObject:self.card_dic[@"card_code"] forKey:@"cardCode"];
+    [muta_dic setObject:self.card_dic[@"card_level"] forKey:@"cardLevel"];
+    
+    [muta_dic setValue:@"count_card" forKey:@"operate"];
+    
+    
+   
+    
+    
+    int cishu =[self.card_dic[@"rule"] intValue];
+    float pay = (self.all/cishu)*self.number_count;
+    [muta_dic setObject:@"计次卡" forKey:@"cardType"];
+    
+    
+    [muta_dic setValue:[NSString stringWithFormat:@"%ld",self.number_count] forKey:@"num"];
+
+    
+    
+    [muta_dic setObject:[[NSString alloc] initWithFormat:@"%.2f",pay] forKey:@"sum"];
+    
+    
+    NSMutableDictionary*paramer = [NSMutableDictionary dictionary];
+    [paramer setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
+    
+    [paramer setValue:[NSString dictionaryToJson:muta_dic] forKey:@"content"];
+    
+    
+    NSLog(@"======%@",paramer);
+    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+        
+        if ([result[@"result_code"] intValue]==1) {
+            
+            
+            NSMutableDictionary *m_dic = [NSMutableDictionary dictionary];
+            
+            [m_dic setValue:result[@"order_id"] forKey:@"order_id"];
+            
+            [m_dic setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
+            
+            NSString  *codeString = [NSString dictionaryToJson:m_dic];
+            
+            
+            NSString *string=[NSString stringWithFormat:@"%@%@",HEADIMAGE,[app.userInfoDic objectForKey:@"headimage"]];
+            
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                
+                NSURL * nurl1=[NSURL URLWithString:[string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+                UIImage *img=  [UIImage imageWithData:[NSData dataWithContentsOfURL:nurl1]];
+                
+                img = [NSString setThumbnailFromImage:img];
+                
+                if (!img) {
+                    img = [UIImage imageNamed:@"app_icon3"];
+                }
+                
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:img logoImageSize:CGSizeMake(_QRView.width*0.2, _QRView.width*0.2) logoImageWithCornerRadius:10];
+                });
+                
+            }) ;
+            
+            
+            
+        }
+        
+        NSLog(@"=result=====%@",result);
+        
+        
+    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"=error=====%@",error);
+        
+    }];
+    
+    
+    
+}
 
 @end

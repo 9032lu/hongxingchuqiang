@@ -12,6 +12,7 @@
 @interface ChosePayMealVC ()<UITableViewDelegate,UITableViewDataSource>
 
 
+
 @property (weak, nonatomic) IBOutlet UITableView *table_view;
 @property (strong, nonatomic) IBOutlet UIView *headerView;
 @property(nonatomic,strong)NSArray *data_A;
@@ -74,7 +75,18 @@
         [self.select_mut_D setValue:@"0" forKey:row];
 
     }else{
-        [self.select_mut_D setValue:@"1" forKey:row];
+       [self.select_mut_D setValue:@"1" forKey:row];
+        //单选
+       
+        for (int i = 0; i <_select_mut_D.count; i ++) {
+            NSString *row = [NSString stringWithFormat:@"%d",i];
+            
+            
+            if ([self.select_mut_D[row] boolValue] && i !=indexPath.row) {
+                [self.select_mut_D setValue:@"0" forKey:row];
+            }
+        }
+        //
 
     }
     

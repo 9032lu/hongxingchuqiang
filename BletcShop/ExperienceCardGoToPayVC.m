@@ -379,7 +379,7 @@
     [muta_dic setValue:app.userInfoDic[@"nickname"] forKey:@"nickname"];
     [muta_dic setValue:app.userInfoDic[@"headimage"] forKey:@"headimage"];
 
-    [muta_dic setValue:self.card_dic[@"price"] forKey:@"num"];
+    [muta_dic setValue:self.card_dic[@"price"] forKey:@"sum"];
 
     [muta_dic setValue:self.card_dic[@"merchant"] forKey:@"muid"];
     [muta_dic setValue:self.card_dic[@"card_code"] forKey:@"code"];
@@ -403,6 +403,7 @@
             [m_dic setValue:result[@"order_id"] forKey:@"order_id"];
             
            [m_dic setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
+            [m_dic setValue:self.card_dic[@"merchant"] forKey:@"muid"];
 
             NSString  *codeString = [NSString dictionaryToJson:m_dic];
             

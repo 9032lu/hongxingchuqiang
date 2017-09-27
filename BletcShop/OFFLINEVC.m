@@ -49,6 +49,9 @@
     [bgView addSubview:_QRView];
     
     NSDictionary *infoDic = [NSDictionary dictionaryWithObjectsAndKeys:self.dic[@"uuid"],@"uuid",self.dic[@"coupon_id"],@"coupon_id", nil];
+    
+    
+
 //    NSString *codeString = [NSString dictionaryToJson:infoDic];
 
 //    [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:[UIImage imageNamed:@"app_icon3"] logoImageSize:CGSizeMake(SCREENWIDTH*0.1, SCREENWIDTH*0.1) logoImageWithCornerRadius:0];
@@ -209,6 +212,8 @@
             
             [m_dic setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
             
+            [m_dic setValue:self.dic[@"muid"] forKey:@"muid"];
+
             NSString  *codeString = [NSString dictionaryToJson:m_dic];
             
             

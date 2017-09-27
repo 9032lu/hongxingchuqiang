@@ -682,7 +682,8 @@
             NSMutableDictionary *m_dic = [NSMutableDictionary dictionary];
             
             [m_dic setValue:result[@"order_id"] forKey:@"order_id"];
-            
+            [m_dic setValue:self.card_dic[@"merchant"] forKey:@"muid"];
+
             [m_dic setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
             
             NSString  *codeString = [NSString dictionaryToJson:m_dic];

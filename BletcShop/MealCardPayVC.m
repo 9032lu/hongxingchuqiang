@@ -392,8 +392,46 @@
     self.QRView = [[UIView alloc]initWithFrame:CGRectMake(88, titleLab.bottom+30, whiteview.width-88*2, whiteview.width-88*2)];
     [whiteview addSubview:_QRView];
     
-    [self creatQrCodeWithPayContent:nil];
-    
+    {
+        
+        AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+        
+        
+        NSMutableDictionary *m_dic = [NSMutableDictionary dictionary];
+        
+        [m_dic setValue:@"null" forKey:@"order_id"];
+        
+        [m_dic setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
+        [m_dic setValue:self.card_dic[@"merchant"] forKey:@"muid"];
+
+        NSString  *codeString = [NSString dictionaryToJson:m_dic];
+        
+        
+        NSString *string=[NSString stringWithFormat:@"%@%@",HEADIMAGE,[app.userInfoDic objectForKey:@"headimage"]];
+        
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            NSURL * nurl1=[NSURL URLWithString:[string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+            UIImage *img=  [UIImage imageWithData:[NSData dataWithContentsOfURL:nurl1]];
+            
+            img = [NSString setThumbnailFromImage:img];
+            
+            if (!img) {
+                img = [UIImage imageNamed:@"app_icon3"];
+            }
+            
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:img logoImageSize:CGSizeMake(_QRView.width*0.2, _QRView.width*0.2) logoImageWithCornerRadius:10];
+            });
+            
+        }) ;
+        
+        
+        
+    }
     
     
     UIView *topline = [[UIView alloc]initWithFrame:CGRectMake(0, self.QRView.bottom+30, whiteview.width, 1)];
@@ -567,6 +605,8 @@
             NSMutableDictionary *m_dic = [NSMutableDictionary dictionary];
             
             [m_dic setValue:result[@"order_id"] forKey:@"order_id"];
+            
+            [m_dic setValue:self.card_dic[@"merchant"] forKey:@"muid"];
             
             [m_dic setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
             

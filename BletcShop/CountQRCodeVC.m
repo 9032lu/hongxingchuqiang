@@ -31,8 +31,8 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     LZDButton *back =[LZDButton creatLZDButton];
-    back.frame = CGRectMake(13, 31, 10, 20);
-    [back setImage:[UIImage imageNamed:@"返回箭头"] forState:0];
+    back.frame = CGRectMake(13, 31, 20, 20);
+    [back setImage:[UIImage imageNamed:@"fhleft"] forState:0];
     back.block = ^(LZDButton *sender) {
         POP
         
@@ -53,7 +53,7 @@
     
     
     
-    UIView *whiteview = [[UIView  alloc]initWithFrame:CGRectMake(0, 10+64, SCREENWIDTH-26, SCREENWIDTH-26)];
+    UIView *whiteview = [[UIView  alloc]initWithFrame:CGRectMake(0, 10+64, SCREENWIDTH, SCREENWIDTH)];
     whiteview.backgroundColor = [UIColor whiteColor];
     whiteview.layer.cornerRadius =6;
     [self.view addSubview:whiteview];

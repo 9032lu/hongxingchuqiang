@@ -74,15 +74,15 @@
     
     
     
-    UILabel *title_lab_1 = [[UILabel alloc]initWithFrame:CGRectMake(0, 31+self.QRView.bottom, whiteview.width, 16)];
-    title_lab_1.text = @"体验金额";
-    title_lab_1.textAlignment= NSTextAlignmentCenter;
-    title_lab_1.textColor = RGB(51,51,51);
-    title_lab_1.font = [UIFont systemFontOfSize:15];
-    [whiteview addSubview:title_lab_1];
+//    UILabel *title_lab_1 = [[UILabel alloc]initWithFrame:CGRectMake(0, 31+self.QRView.bottom, whiteview.width, 16)];
+//    title_lab_1.text = @"体验金额";
+//    title_lab_1.textAlignment= NSTextAlignmentCenter;
+//    title_lab_1.textColor = RGB(51,51,51);
+//    title_lab_1.font = [UIFont systemFontOfSize:15];
+//    [whiteview addSubview:title_lab_1];
     
     
-    UILabel *title_lab_2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 31+title_lab_1.bottom, whiteview.width, 15)];
+    UILabel *title_lab_2 = [[UILabel alloc]initWithFrame:CGRectMake(0, 31+self.QRView.bottom, whiteview.width, 15)];
     title_lab_2.text = [NSString stringWithFormat:@"%ld次",self.number_count];
     title_lab_2.textAlignment= NSTextAlignmentCenter;
     title_lab_2.textColor = RGB(51,51,51);

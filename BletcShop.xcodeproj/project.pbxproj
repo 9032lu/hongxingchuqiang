@@ -803,6 +803,7 @@
 		D9A32BA21F78EA5600E0F280 /* ChosePayMealVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A32BA01F78EA5600E0F280 /* ChosePayMealVC.m */; };
 		D9A32BA31F78EA5600E0F280 /* ChosePayMealVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = D9A32BA11F78EA5600E0F280 /* ChosePayMealVC.xib */; };
 		D9A32BE61F79FFC100E0F280 /* libbaiduNaviSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9A32BE51F79FF5400E0F280 /* libbaiduNaviSDK.a */; };
+		D9A32BE91F7BA0DC00E0F280 /* CountQRCodeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A32BE81F7BA0DB00E0F280 /* CountQRCodeVC.m */; };
 		D9A33E631F5E373E00304F83 /* OilCardRechargeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A33E621F5E373E00304F83 /* OilCardRechargeVC.m */; };
 		D9A33E661F5E37CE00304F83 /* OilCardPayMentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A33E651F5E37CE00304F83 /* OilCardPayMentVC.m */; };
 		D9A33E6A1F5E3DCA00304F83 /* OilCardShareVC.m in Sources */ = {isa = PBXBuildFile; fileRef = D9A33E681F5E3DCA00304F83 /* OilCardShareVC.m */; };
@@ -2302,6 +2303,8 @@
 		D9A32BA01F78EA5600E0F280 /* ChosePayMealVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChosePayMealVC.m; sourceTree = "<group>"; };
 		D9A32BA11F78EA5600E0F280 /* ChosePayMealVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChosePayMealVC.xib; sourceTree = "<group>"; };
 		D9A32BE51F79FF5400E0F280 /* libbaiduNaviSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libbaiduNaviSDK.a; sourceTree = "<group>"; };
+		D9A32BE71F7BA0DB00E0F280 /* CountQRCodeVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CountQRCodeVC.h; sourceTree = "<group>"; };
+		D9A32BE81F7BA0DB00E0F280 /* CountQRCodeVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CountQRCodeVC.m; sourceTree = "<group>"; };
 		D9A33E611F5E373E00304F83 /* OilCardRechargeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OilCardRechargeVC.h; sourceTree = "<group>"; };
 		D9A33E621F5E373E00304F83 /* OilCardRechargeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OilCardRechargeVC.m; sourceTree = "<group>"; };
 		D9A33E641F5E37CE00304F83 /* OilCardPayMentVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OilCardPayMentVC.h; sourceTree = "<group>"; };
@@ -5448,6 +5451,8 @@
 			children = (
 				18F4CD471D6FD6BD008FBAD1 /* CountPAYViewController.h */,
 				18F4CD481D6FD6BD008FBAD1 /* CountPAYViewController.m */,
+				D9A32BE71F7BA0DB00E0F280 /* CountQRCodeVC.h */,
+				D9A32BE81F7BA0DB00E0F280 /* CountQRCodeVC.m */,
 				1844371D1F57DC00001D5046 /* 计次卡支付+-icon */,
 			);
 			name = "计次卡支付";
@@ -6579,6 +6584,7 @@
 				D9A06B601D8679C30037795B /* EMCDDeviceManagerBase.m in Sources */,
 				186991561F661D000084D3C8 /* NewUserAccessCodeVC.m in Sources */,
 				D9D50DB71D87DE0E00A5E469 /* ExpressionKeyboardView.m in Sources */,
+				D9A32BE91F7BA0DC00E0F280 /* CountQRCodeVC.m in Sources */,
 				D9CF3FA21D7671D500D9D0EC /* ApplyAndNoticeVC.m in Sources */,
 				1829884B1E727DF200164F32 /* SweetNoticeVC.m in Sources */,
 				1A4173CF1D78809B00A70601 /* RealtimeSearchUtil.m in Sources */,

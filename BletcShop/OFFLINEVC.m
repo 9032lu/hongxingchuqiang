@@ -184,11 +184,14 @@
     AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
     
     
-    NSMutableDictionary*muta_dic = [NSMutableDictionary dictionary];
-    [muta_dic setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
+    NSMutableDictionary*muta_dic = [NSMutableDictionary dictionaryWithDictionary:option_dic];
+//    [muta_dic setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
     [muta_dic setValue:app.userInfoDic[@"nickname"] forKey:@"nickname"];
     [muta_dic setValue:app.userInfoDic[@"headimage"] forKey:@"headimage"];
-    
+    [muta_dic setValue:self.dic[@"pri_condition"] forKey:@"pri_condition"];
+    [muta_dic setValue:self.dic[@"sum"] forKey:@"sum"];
+
+    [muta_dic setValue:self.dic[@"muid"] forKey:@"muid"];
 
     
     [muta_dic setValue:@"coupon" forKey:@"operate"];

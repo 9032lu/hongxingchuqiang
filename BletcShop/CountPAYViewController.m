@@ -14,6 +14,8 @@
 #import "PayVictoryVC.h"
 #import "HGDQQRCodeView.h"
 
+#import "CountQRCodeVC.h"
+
 @interface CountPAYViewController ()<UITextFieldDelegate,UIAlertViewDelegate,PayCustomViewDelegate,UIScrollViewDelegate>
 {
     UITextField *textTF;
@@ -495,11 +497,11 @@
     [whiteview addSubview:titleLab];
     
     
-    self.QRView = [[UIView alloc]initWithFrame:CGRectMake(88, titleLab.bottom+30, whiteview.width-88*2, whiteview.width-88*2)];
-    [whiteview addSubview:_QRView];
-    
- 
-    [self creatQrCodeWithPayContent];
+//    self.QRView = [[UIView alloc]initWithFrame:CGRectMake(88, titleLab.bottom+30, whiteview.width-88*2, whiteview.width-88*2)];
+//    [whiteview addSubview:_QRView];
+//
+//
+//    [self creatQrCodeWithPayContent];
 
     
    
@@ -507,7 +509,7 @@
     
     
     //显示次数的label
-    UITextField*countTF =[[UITextField alloc]initWithFrame:CGRectMake((whiteview.width-114)/2,_QRView.bottom+ 35, 120, 50)];
+    UITextField*countTF =[[UITextField alloc]initWithFrame:CGRectMake((whiteview.width-114)/2,titleLab.bottom+70, 120, 50)];
     countTF.textAlignment=1;
     countTF.backgroundColor=RGB(243, 73, 78);
     countTF.textColor=[UIColor whiteColor];
@@ -559,7 +561,6 @@
             countTF.text=[[NSString alloc]initWithFormat:@"%ld",_number_count];
             
            
-            [self creatQrCodeWithPayContent];
             
         }
         
@@ -580,18 +581,55 @@
         if (_number_count<time) {
             _number_count++;
             countTF.text=[[NSString alloc]initWithFormat:@"%ld",_number_count];
-            
-            [self creatQrCodeWithPayContent];
-
-            
+         
         }
         
     };
   
     
+    
+    LZDButton *creatbtn= [LZDButton creatLZDButton];
+    creatbtn.frame = CGRectMake(70, countTF.bottom+85, whiteview.width-140, 45);
+    creatbtn.layer.cornerRadius =5;
+    creatbtn.layer.borderWidth = 1 ;
+    creatbtn.layer.borderColor =RGB(243, 73, 78).CGColor;
+    creatbtn.layer.masksToBounds = YES;
+    [creatbtn setTitle:@"生成付款码" forState:0];
+    [creatbtn setTitleColor:RGB(243, 73, 78) forState:0];
+    creatbtn.titleLabel.font = [UIFont systemFontOfSize:16];
+    
+    [whiteview addSubview:creatbtn];
+
+    creatbtn.block = ^(LZDButton *sender) {
+      
+        
+        if (_number_count!=0) {
+            PUSH(CountQRCodeVC)
+            vc.card_dic =self.card_dic;
+            vc.all = self.all;
+            vc.number_count = self.number_count;
+            vc.user = self.user;
+            
+            vc.resetNumBlock = ^{
+                self.number_count= 0;
+                
+                countTF.text=[[NSString alloc]initWithFormat:@"%ld",_number_count];
+                
+                
+            };
+        }else{
+            
+            
+            [self showHint:@"请选择支付次数!"];
+        }
+      
+        
+    };
+    
+
     CGRect frame = whiteview.frame;
     
-    frame.size.height = countTF.bottom +45;
+    frame.size.height = creatbtn.bottom +45;
     whiteview.frame = frame;
     
 }
@@ -632,99 +670,99 @@
 /*
  生成订单信息,生成二维码
  **/
--(void)creatQrCodeWithPayContent{
-    
-    NSString *url = [NSString stringWithFormat:@"%@MerchantType/gather/getQrcode",BASEURL];
-    
-    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
-    
-    
-    NSMutableDictionary*muta_dic = [NSMutableDictionary dictionary];
-    [muta_dic setObject:self.user forKey:@"uuid"];
-    [muta_dic setValue:app.userInfoDic[@"nickname"] forKey:@"nickname"];
-    [muta_dic setValue:app.userInfoDic[@"headimage"] forKey:@"headimage"];
-    
-    
-    [muta_dic setValue:self.card_dic[@"merchant"] forKey:@"muid"];
-    [muta_dic setObject:self.card_dic[@"card_code"] forKey:@"cardCode"];
-    [muta_dic setObject:self.card_dic[@"card_level"] forKey:@"cardLevel"];
-    
-    [muta_dic setValue:@"count_card" forKey:@"operate"];
-    
-    
-   
-    
-    
-    int cishu =[self.card_dic[@"rule"] intValue];
-    float pay = (self.all/cishu)*self.number_count;
-    [muta_dic setObject:@"计次卡" forKey:@"cardType"];
-    
-    
-    [muta_dic setValue:[NSString stringWithFormat:@"%ld",self.number_count] forKey:@"num"];
-
-    
-    
-    [muta_dic setObject:[[NSString alloc] initWithFormat:@"%.2f",pay] forKey:@"sum"];
-    
-    
-    NSMutableDictionary*paramer = [NSMutableDictionary dictionary];
-    [paramer setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
-    
-    [paramer setValue:[NSString dictionaryToJson:muta_dic] forKey:@"content"];
-    
-    
-    NSLog(@"======%@",paramer);
-    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
-        
-        if ([result[@"result_code"] intValue]==1) {
-            
-            
-            NSMutableDictionary *m_dic = [NSMutableDictionary dictionary];
-            
-            [m_dic setValue:result[@"order_id"] forKey:@"order_id"];
-            [m_dic setValue:self.card_dic[@"merchant"] forKey:@"muid"];
-
-            [m_dic setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
-            
-            NSString  *codeString = [NSString dictionaryToJson:m_dic];
-            
-            
-            NSString *string=[NSString stringWithFormat:@"%@%@",HEADIMAGE,[app.userInfoDic objectForKey:@"headimage"]];
-            
-            
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                
-                NSURL * nurl1=[NSURL URLWithString:[string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
-                UIImage *img=  [UIImage imageWithData:[NSData dataWithContentsOfURL:nurl1]];
-                
-                img = [NSString setThumbnailFromImage:img];
-                
-                if (!img) {
-                    img = [UIImage imageNamed:@"app_icon3"];
-                }
-                
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    
-                    [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:img logoImageSize:CGSizeMake(_QRView.width*0.2, _QRView.width*0.2) logoImageWithCornerRadius:10];
-                });
-                
-            }) ;
-            
-            
-            
-        }
-        
-        NSLog(@"=result=====%@",result);
-        
-        
-    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"=error=====%@",error);
-        
-    }];
-    
-    
-    
-}
+//-(void)creatQrCodeWithPayContent{
+//
+//    NSString *url = [NSString stringWithFormat:@"%@MerchantType/gather/getQrcode",BASEURL];
+//
+//    AppDelegate *app = (AppDelegate*)[UIApplication sharedApplication].delegate;
+//
+//
+//    NSMutableDictionary*muta_dic = [NSMutableDictionary dictionary];
+//    [muta_dic setObject:self.user forKey:@"uuid"];
+//    [muta_dic setValue:app.userInfoDic[@"nickname"] forKey:@"nickname"];
+//    [muta_dic setValue:app.userInfoDic[@"headimage"] forKey:@"headimage"];
+//
+//
+//    [muta_dic setValue:self.card_dic[@"merchant"] forKey:@"muid"];
+//    [muta_dic setObject:self.card_dic[@"card_code"] forKey:@"cardCode"];
+//    [muta_dic setObject:self.card_dic[@"card_level"] forKey:@"cardLevel"];
+//
+//    [muta_dic setValue:@"count_card" forKey:@"operate"];
+//
+//
+//
+//
+//
+//    int cishu =[self.card_dic[@"rule"] intValue];
+//    float pay = (self.all/cishu)*self.number_count;
+//    [muta_dic setObject:@"计次卡" forKey:@"cardType"];
+//
+//
+//    [muta_dic setValue:[NSString stringWithFormat:@"%ld",self.number_count] forKey:@"num"];
+//
+//
+//
+//    [muta_dic setObject:[[NSString alloc] initWithFormat:@"%.2f",pay] forKey:@"sum"];
+//
+//
+//    NSMutableDictionary*paramer = [NSMutableDictionary dictionary];
+//    [paramer setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
+//
+//    [paramer setValue:[NSString dictionaryToJson:muta_dic] forKey:@"content"];
+//
+//
+//    NSLog(@"======%@",paramer);
+//    [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+//
+//        if ([result[@"result_code"] intValue]==1) {
+//
+//
+//            NSMutableDictionary *m_dic = [NSMutableDictionary dictionary];
+//
+//            [m_dic setValue:result[@"order_id"] forKey:@"order_id"];
+//            [m_dic setValue:self.card_dic[@"merchant"] forKey:@"muid"];
+//
+//            [m_dic setValue:app.userInfoDic[@"uuid"] forKey:@"uuid"];
+//
+//            NSString  *codeString = [NSString dictionaryToJson:m_dic];
+//
+//
+//            NSString *string=[NSString stringWithFormat:@"%@%@",HEADIMAGE,[app.userInfoDic objectForKey:@"headimage"]];
+//
+//
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+//
+//                NSURL * nurl1=[NSURL URLWithString:[string stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]]];
+//                UIImage *img=  [UIImage imageWithData:[NSData dataWithContentsOfURL:nurl1]];
+//
+//                img = [NSString setThumbnailFromImage:img];
+//
+//                if (!img) {
+//                    img = [UIImage imageNamed:@"app_icon3"];
+//                }
+//
+//
+//                dispatch_async(dispatch_get_main_queue(), ^{
+//
+//                    [HGDQQRCodeView creatQRCodeWithURLString:codeString superView:self.QRView logoImage:img logoImageSize:CGSizeMake(_QRView.width*0.2, _QRView.width*0.2) logoImageWithCornerRadius:10];
+//                });
+//
+//            }) ;
+//
+//
+//
+//        }
+//
+//        NSLog(@"=result=====%@",result);
+//
+//
+//    } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+//        NSLog(@"=error=====%@",error);
+//
+//    }];
+//
+//
+//
+//}
 
 @end

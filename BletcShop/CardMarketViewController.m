@@ -182,7 +182,7 @@
     [searchView addSubview:search1];
     
     
-    search_tf=[[UITextField alloc]initWithFrame:CGRectMake(search1.right+10, 8, searchView.width-(search1.right+10), 20)];
+    search_tf=[[UITextField alloc]initWithFrame:CGRectMake(search1.right+10, searchView.height/2-10, searchView.width-(search1.right+10), 20)];
     search_tf.placeholder=@"总有一款适合你";
     search_tf.delegate=self;
     [search_tf setValue:[UIFont systemFontOfSize:13] forKeyPath:@"_placeholderLabel.font"];
@@ -291,6 +291,13 @@
     
     
     
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return [[UIView alloc] init];
+}
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    return [[UIView alloc] init];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{

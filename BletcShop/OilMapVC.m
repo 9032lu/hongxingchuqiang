@@ -73,7 +73,7 @@
     
     UIButton *rightItemButoon=[UIButton buttonWithType:UIButtonTypeCustom];
     rightItemButoon.frame=CGRectMake(0, 0, 20, 20);
-    [rightItemButoon setImage:[UIImage imageNamed:@"陈列 icon"] forState:UIControlStateNormal];
+    [rightItemButoon setImage:[UIImage imageNamed:@"矢量智能对象"] forState:UIControlStateNormal];
     
     [rightItemButoon addTarget:self action:@selector(goOilShopList) forControlEvents:UIControlEventTouchUpInside];
     

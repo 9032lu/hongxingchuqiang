@@ -179,6 +179,8 @@ static NSString *headerID = @"headerID";
        
       
         
+        
+        
         _collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0 , 0 , SCREENWIDTH, SCREENHEIGHT-self.tabBarController.tabBar.frame.size.height) collectionViewLayout:self.flowlayout];
 
         _collectionView.delegate = self;
@@ -187,6 +189,14 @@ static NSString *headerID = @"headerID";
         _collectionView.showsHorizontalScrollIndicator = NO;
         [_collectionView setBackgroundColor:RGB(240, 240, 240)];
         //注册cell
+        
+    
+        
+        if (@available(iOS 11.0, *)) {
+            _collectionView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;//UIScrollView也适用
+        }else {
+            self.automaticallyAdjustsScrollViewInsets = NO;
+        }
         
         [_collectionView registerNib:[UINib nibWithNibName:@"HomeCollectionCell" bundle:[NSBundle mainBundle]] forCellWithReuseIdentifier:cellID];
         
@@ -412,7 +422,7 @@ static NSString *headerID = @"headerID";
     [searchView addSubview:search1];
     
     
-    search_tf=[[UITextField alloc]initWithFrame:CGRectMake(search1.right+10, 8, searchView.width-(search1.right+10), 20)];
+    search_tf=[[UITextField alloc]initWithFrame:CGRectMake(search1.right+10, searchView.height/2-10, searchView.width-(search1.right+10), 20)];
     search_tf.placeholder=@"总有一款适合你";
     search_tf.delegate=self;
     [search_tf setValue:[UIFont systemFontOfSize:13] forKeyPath:@"_placeholderLabel.font"];

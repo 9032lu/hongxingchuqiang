@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -39,7 +39,7 @@
                 <constraint firstItem="k49-bO-A6g" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CIb-7w-Cyl"/>
                 <constraint firstAttribute="trailing" secondItem="k49-bO-A6g" secondAttribute="trailing" id="YmX-5s-csV"/>
             </constraints>
-            <point key="canvasLocation" x="190" y="-288"/>
+            <point key="canvasLocation" x="41" y="-299"/>
         </view>
         <view contentMode="scaleToFill" id="phW-tg-qjp">
             <rect key="frame" x="0.0" y="0.0" width="92" height="44"/>
@@ -75,9 +75,9 @@
             <constraints>
                 <constraint firstItem="uTE-vX-fEI" firstAttribute="leading" secondItem="FMX-eq-Rdm" secondAttribute="trailing" constant="5" id="7JA-tl-Bcm"/>
                 <constraint firstItem="FMX-eq-Rdm" firstAttribute="leading" secondItem="phW-tg-qjp" secondAttribute="leading" constant="4" id="AjU-HU-NN7"/>
+                <constraint firstItem="FMX-eq-Rdm" firstAttribute="centerY" secondItem="phW-tg-qjp" secondAttribute="centerY" id="WTW-4F-dGW"/>
                 <constraint firstItem="9Zs-q5-ift" firstAttribute="leading" secondItem="uTE-vX-fEI" secondAttribute="trailing" constant="4" id="dt7-WG-dS8"/>
                 <constraint firstItem="uTE-vX-fEI" firstAttribute="centerY" secondItem="9Zs-q5-ift" secondAttribute="centerY" id="gjY-IZ-Mrt"/>
-                <constraint firstItem="FMX-eq-Rdm" firstAttribute="top" secondItem="phW-tg-qjp" secondAttribute="top" constant="13" id="qnr-Qt-E4S"/>
                 <constraint firstItem="uTE-vX-fEI" firstAttribute="centerY" secondItem="FMX-eq-Rdm" secondAttribute="centerY" id="sx1-t1-OOp"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
@@ -85,7 +85,7 @@
             <connections>
                 <outletCollection property="gestureRecognizers" destination="PYV-nb-q9Y" appends="YES" id="I8T-DX-c9l"/>
             </connections>
-            <point key="canvasLocation" x="-344" y="-471"/>
+            <point key="canvasLocation" x="-499" y="-943"/>
         </view>
         <tapGestureRecognizer id="PYV-nb-q9Y">
             <connections>
@@ -115,7 +115,7 @@
             <connections>
                 <outletCollection property="gestureRecognizers" destination="sA8-NV-svE" appends="YES" id="yFG-g4-BC9"/>
             </connections>
-            <point key="canvasLocation" x="-300" y="-629"/>
+            <point key="canvasLocation" x="-521" y="-761"/>
         </view>
         <tapGestureRecognizer id="sA8-NV-svE">
             <connections>

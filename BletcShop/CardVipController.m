@@ -42,7 +42,12 @@
     UILabel *placeHoderlab;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self postRequestVipCard];
 
+    
+}
 
 -(void)viewDidLoad
 {
@@ -61,7 +66,6 @@
     [self initCatergray];
     [self _inittable];
     
-    [self postRequestVipCard];
 
 
 }
@@ -631,6 +635,57 @@
 }
 
 
+
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+ 
+    
+    return UITableViewCellEditingStyleDelete;
+    
+}
+-(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section ==self.wholeDataArray.count-1) {
+        return NO;
+    }else
+        
+    return YES;
+}
+
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    if (indexPath.section !=self.wholeDataArray.count-1) {
+        
+        if (editingStyle == UITableViewCellEditingStyleDelete) {
+            
+            
+            NSString *url = @"http://101.201.100.191/cnconsum/App/UserType/card/del";
+            
+            NSDictionary *dic =[self.wholeDataArray[indexPath.section] objectAtIndex:indexPath.row];
+
+            NSMutableDictionary*paramer = [NSMutableDictionary dictionary];
+            [paramer setValue:dic[@"merchant"] forKey:@"muid"];
+            [paramer setValue:dic[@"user"] forKey:@"uuid"];
+            [paramer setValue:dic[@"card_code"] forKey:@"cardCode"];
+            [paramer setValue:dic[@"card_level"] forKey:@"cardLevel"];
+            [paramer setValue:dic[@"card_type"] forKey:@"cardType"];
+
+            [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
+                NSLog(@"===UITableViewCellEditingStyleDelete=====%@",result);
+
+                
+                [self postRequestVipCard];
+
+                
+            } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"===UITableViewCellEditingStyleDelete====error=%@",error);
+
+            }];
+
+            
+        }
+        
+    }
+    
+}
 
 -(NSArray *)kindArray{
     if (!_kindArray) {

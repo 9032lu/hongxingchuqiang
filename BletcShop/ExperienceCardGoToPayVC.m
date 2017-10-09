@@ -32,10 +32,24 @@
 
 @implementation ExperienceCardGoToPayVC
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"体验卡支付";
-    LEFTBACK
+    
+    LZDButton *back =[LZDButton creatLZDButton];back.frame = CGRectMake(0, 11, 30, 40);
+    back.imageEdgeInsets = UIEdgeInsetsMake(0, -13, 0, 0);
+    [back setImage:[UIImage imageNamed:@"返回箭头"] forState:0];back.block = ^(LZDButton *sender) {
+        
+        [self.navigationController popToViewController:self.navigationController.viewControllers[1] animated:YES];
+        
+        
+        
+    };
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:back];
+    
+    
     self.card_des.text = [NSString stringWithFormat:@"¥:%@",_card_dic[@"price"]];
     self.scrollviewContentWidth.constant = SCREENWIDTH*2;
 

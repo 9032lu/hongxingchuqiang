@@ -35,7 +35,7 @@
 
 -(void)initSubViews{
     
-    UIImageView *imgV = [[UIImageView alloc]initWithFrame:CGRectMake(13, 31, 10, 20)];
+    UIImageView *imgV = [[UIImageView alloc]initWithFrame:CGRectMake(17, 31+5, 9, 16)];
     imgV.image =[UIImage imageNamed:@"返回箭头"];
     imgV.userInteractionEnabled = YES;
     [self addSubview:imgV];

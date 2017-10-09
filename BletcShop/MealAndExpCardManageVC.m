@@ -49,6 +49,15 @@
     }
     return _imageNameArray;
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self postRequestAllInfo:_card_dic[@"card_type"]];
+
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"会员卡";
@@ -90,7 +99,6 @@ LEFTBACK
 
     }
     
-    [self postRequestAllInfo:_card_dic[@"card_type"]];
 
 }
 

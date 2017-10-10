@@ -9,6 +9,7 @@
 
 #import "RechargeViewController.h"
 #import "PayMentController.h"
+#import "InstrumentAlertView.h"
 @interface RechargeViewController ()
 
 
@@ -64,7 +65,22 @@
         
     };
     [topView addSubview:backTi];
+    
+    LZDButton*rightItem=[LZDButton creatLZDButton];
+    [rightItem setImage:[UIImage imageNamed:@"白色叹号"] forState: UIControlStateNormal];
+    rightItem.frame=CGRectMake(SCREENWIDTH-54, backTi.top, 44, 44);
+    rightItem.block = ^(LZDButton*btn)
+    {
+    NSString *content_S = @"继续充值会员卡\n持续享受优惠";
+        
+    InstrumentAlertView *xlAlertView = [[InstrumentAlertView alloc]initWithTitle:@"说明" message:content_S sureBtn:@"知道了" cancleBtn:@"" logo:nil bgImageView:nil];
+    xlAlertView.resultIndex = ^(NSInteger index){
 
+    };
+    [xlAlertView showXLAlertView];
+    };
+    [topView addSubview:rightItem];
+   
     [self initSubViews];
     
 

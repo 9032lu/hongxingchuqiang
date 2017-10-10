@@ -8,7 +8,7 @@
 
 #import "CardEricShareViewController.h"
 #import "CheckTransferStateAndEditOrRemoveCardViewController.h"
-
+#import "InstrumentAlertView.h"
 @interface CardEricShareViewController ()
 {
     NSInteger rule;
@@ -21,6 +21,22 @@
     [super viewDidLoad];
     self.view.backgroundColor=RGB(240, 240, 240);
     self.navigationItem.title=@"会员卡分享";
+    LZDButton*rightItem=[LZDButton creatLZDButton];
+    [rightItem setImage:[UIImage imageNamed:@"黑色叹号"] forState: UIControlStateNormal];
+    rightItem.frame=CGRectMake(0, 0, 44, 44);
+    rightItem.block = ^(LZDButton*btn)
+    {
+        NSString *content_S = @"共享卡来喽，\n 收取分享手续费，\n 让他/她和你一起享用会员卡吧";
+        
+        InstrumentAlertView *xlAlertView = [[InstrumentAlertView alloc]initWithTitle:@"说明" message:content_S sureBtn:@"知道了" cancleBtn:@"" logo:nil bgImageView:nil];
+        xlAlertView.resultIndex = ^(NSInteger index){
+            
+        };
+        [xlAlertView showXLAlertView];
+    };
+    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithCustomView:rightItem];
+    self.navigationItem.rightBarButtonItem=item;
+    
     UIView *bgView=[[UIView alloc]initWithFrame:CGRectMake(0, 10, SCREENWIDTH, SCREENHEIGHT-64-10-90)];
     bgView.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:bgView];

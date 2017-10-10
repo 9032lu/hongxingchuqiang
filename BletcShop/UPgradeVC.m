@@ -9,7 +9,7 @@
 #import "UPgradeVC.h"
 #import "PayMentController.h"
 #import "ValuePickerView.h"
-
+#import "InstrumentAlertView.h"
 @interface UPgradeVC ()<UIAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *card_level;
@@ -34,7 +34,23 @@
     self.cha = 0.0;
     self.level =self.card_dic[@"card_level"];
     LEFTBACK
-
+    
+    LZDButton*rightItem=[LZDButton creatLZDButton];
+    [rightItem setImage:[UIImage imageNamed:@"黑色叹号"] forState: UIControlStateNormal];
+    rightItem.frame=CGRectMake(0, 0, 44, 44);
+    rightItem.block = ^(LZDButton*btn)
+    {
+        NSString *content_S = @"一键升级会员卡\n秒变至尊vip\n享受优质服务";
+        
+        InstrumentAlertView *xlAlertView = [[InstrumentAlertView alloc]initWithTitle:@"说明" message:content_S sureBtn:@"知道了" cancleBtn:@"" logo:nil bgImageView:nil];
+        xlAlertView.resultIndex = ^(NSInteger index){
+            
+        };
+        [xlAlertView showXLAlertView];
+    };
+    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithCustomView:rightItem];
+    self.navigationItem.rightBarButtonItem=item;
+    
     self.card_level.text = self.level;
     self.price_lab.text = @"0.00";
     

@@ -234,6 +234,7 @@
 		18F05E671E2626BD002E4C10 /* TransferOwnershipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F05E661E2626BD002E4C10 /* TransferOwnershipViewController.m */; };
 		18F05E6A1E263B6B002E4C10 /* CheckTransferStateAndEditOrRemoveCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F05E691E263B6B002E4C10 /* CheckTransferStateAndEditOrRemoveCardViewController.m */; };
 		18F065141EA0983000D62B5F /* ValuePickerViewEric.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F065131EA0983000D62B5F /* ValuePickerViewEric.m */; };
+		18F10C701F8C7A4F007CB370 /* InstrumentAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F10C6F1F8C7A4F007CB370 /* InstrumentAlertView.m */; };
 		18F27EC91D640C21002DD03A /* NewModelImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F27EC81D640C21002DD03A /* NewModelImageViewController.m */; };
 		18F27EE91D640E84002DD03A /* 头像-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F27ECB1D640E84002DD03A /* 头像-1.png */; };
 		18F27EEA1D640E84002DD03A /* 头像-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 18F27ECC1D640E84002DD03A /* 头像-2.png */; };
@@ -1346,6 +1347,8 @@
 		18F05E691E263B6B002E4C10 /* CheckTransferStateAndEditOrRemoveCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheckTransferStateAndEditOrRemoveCardViewController.m; sourceTree = "<group>"; };
 		18F065121EA0983000D62B5F /* ValuePickerViewEric.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValuePickerViewEric.h; sourceTree = "<group>"; };
 		18F065131EA0983000D62B5F /* ValuePickerViewEric.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValuePickerViewEric.m; sourceTree = "<group>"; };
+		18F10C6E1F8C7A4F007CB370 /* InstrumentAlertView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InstrumentAlertView.h; sourceTree = "<group>"; };
+		18F10C6F1F8C7A4F007CB370 /* InstrumentAlertView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InstrumentAlertView.m; sourceTree = "<group>"; };
 		18F27EC71D640C21002DD03A /* NewModelImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewModelImageViewController.h; sourceTree = "<group>"; };
 		18F27EC81D640C21002DD03A /* NewModelImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewModelImageViewController.m; sourceTree = "<group>"; };
 		18F27ECB1D640E84002DD03A /* 头像-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "头像-1.png"; sourceTree = "<group>"; };
@@ -5908,6 +5911,8 @@
 				D9C0E95A1DCC81DD00FD1199 /* ShaperView.m */,
 				182F3C3C1F0CD70700540FAE /* XLAlertView.h */,
 				182F3C3D1F0CD70700540FAE /* XLAlertView.m */,
+				18F10C6E1F8C7A4F007CB370 /* InstrumentAlertView.h */,
+				18F10C6F1F8C7A4F007CB370 /* InstrumentAlertView.m */,
 			);
 			name = otherSDK;
 			sourceTree = "<group>";
@@ -6714,6 +6719,7 @@
 				D9541EA41E1F7D0E003022E5 /* LZDRootViewController.m in Sources */,
 				184E84671F3D923600D8140F /* FriendInfoVC.m in Sources */,
 				D936F5831D473CBF00424B22 /* MyCashCouponViewController.m in Sources */,
+				18F10C701F8C7A4F007CB370 /* InstrumentAlertView.m in Sources */,
 				D9D50DB31D87DE0E00A5E469 /* Emoji.m in Sources */,
 				D9764E801DD591A500B088DE /* AddBankAccountVC.m in Sources */,
 				18148E671F173C66001C86AC /* NewCardPayTableViewCell.m in Sources */,

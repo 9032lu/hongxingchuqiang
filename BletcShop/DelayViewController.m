@@ -10,6 +10,7 @@
 #import "ValuePickerView.h"
 
 #import "DelayScanVC.h"
+#import "InstrumentAlertView.h"
 @interface DelayViewController ()
 
 @property (nonatomic , strong) NSArray *deadLine_A;//有效期数组
@@ -62,7 +63,24 @@
    
     [button addTarget:self action:@selector(sacnClcik) forControlEvents:UIControlEventTouchUpInside];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
+    
+    LZDButton*rightItem=[LZDButton creatLZDButton];
+    [rightItem setImage:[UIImage imageNamed:@"黑色叹号"] forState: UIControlStateNormal];
+    rightItem.frame=CGRectMake(0, 0, 44, 44);
+    rightItem.block = ^(LZDButton*btn)
+    {
+        NSString *content_S = @"会员卡到期后可以申请延期 \n经商家同意后方可继续使用";
+        
+        InstrumentAlertView *xlAlertView = [[InstrumentAlertView alloc]initWithTitle:@"说明" message:content_S sureBtn:@"知道了" cancleBtn:@"" logo:nil bgImageView:nil];
+        xlAlertView.resultIndex = ^(NSInteger index){
+            
+        };
+        [xlAlertView showXLAlertView];
+    };
+    UIBarButtonItem *item1=[[UIBarButtonItem alloc]initWithCustomView:rightItem];
+    UIBarButtonItem *item2=[[UIBarButtonItem alloc]initWithCustomView:button];
+    self.navigationItem.rightBarButtonItems=@[item1,item2];
+    //self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];
     
     self.pickerView = [[ValuePickerView alloc]init];
     UILabel *label1 = [[UILabel alloc]initWithFrame:CGRectMake(16, 8, SCREENWIDTH, 24)];

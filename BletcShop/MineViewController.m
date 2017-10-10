@@ -114,13 +114,13 @@
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
-    [params setObject:@"integral" forKey:@"type"];
-    
+//    [params setObject:@"integral" forKey:@"type"];
+    [params setObject:@"remain" forKey:@"type"];
     
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
         NSLog(@"result==%@", result);
-        self.allPoint = [NSString getTheNoNullStr:result[@"integral"] andRepalceStr:@"0"];
+        self.allPoint = [NSString getTheNoNullStr:result[@"remain"] andRepalceStr:@"余额0元"];
         NSLog(@"%@", self.allPoint);
         [self.Mytable reloadData];
         
@@ -135,7 +135,7 @@
 {
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
-    self.allPoint = @"0";
+    self.allPoint = @"0元";
     [self _loading];
     if (mom) {
         mom.frame=CGRectMake(0, 0, SCREENWIDTH, 166);
@@ -347,10 +347,36 @@
         cell.bgImageView.image=[UIImage imageNamed:@""];
         cell.bgImageView.backgroundColor=[UIColor whiteColor];
     }
-    if (indexPath.section==1&&indexPath.row==0) {
-        cell.desLale.hidden=NO;
-    }else{
-        cell.desLale.hidden=YES;
+//    if (indexPath.section==1&&indexPath.row==0) {
+//        cell.desLale.hidden=NO;
+//        cell.desLale.text=@"与好友聊几毛钱的";
+//    }else{
+//        cell.desLale.hidden=YES;
+//    }
+    if (indexPath.section==0) {
+        if (indexPath.row==2||indexPath.row==4) {
+            cell.desLale.hidden=NO;
+            if (indexPath.row==2) {
+                cell.desLale.text=self.allPoint;
+            }else{
+                cell.desLale.text=@"签到赚积分，好礼赢不停";
+            }
+        }else{
+            cell.desLale.hidden=YES;
+        }
+    }else if (indexPath.section==1){
+        if (indexPath.row==0||indexPath.row==3||indexPath.row==4) {
+            cell.desLale.hidden=NO;
+            if (indexPath.row==0) {
+                cell.desLale.text=@"与好友聊几毛钱的";
+            }else if(indexPath.row==3){
+                cell.desLale.text=@"听说高颜值自带强大推荐属性";
+            }else{
+                cell.desLale.text=@"邀好友赚红包，一不小心又套路了一把";
+            }
+        }else{
+            cell.desLale.hidden=YES;
+        }
     }
     return cell;
     
@@ -414,48 +440,48 @@
     }
 }
 
--(void)postRequestEvaluate
-{
-    
-    NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/evaluate/listGet",BASEURL];
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
-    [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
-    
-    
-    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
-     {
-         NSLog(@"result==%@", result);
-         
-         NSMutableArray *evaluateArray = [result copy];
-         if (evaluateArray.count>0) {
-             [self startEvaluateView];
-         }else{
-             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-             //            hud.frame = CGRectMake(0, 64, 375, 667);
-             // Set the annular determinate mode to show task progress.
-             hud.mode = MBProgressHUDModeText;
-             
-             hud.label.text = NSLocalizedString(@"无未评价订单", @"HUD message title");
-             hud.label.font = [UIFont systemFontOfSize:13];
-             // Move to bottm center.
-             //    hud.offset = CGPointMake(0.f, );
-             hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
-             [hud hideAnimated:YES afterDelay:3.f];
-         }
-         
-     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
-         //         [self noIntenet];
-         NSLog(@"%@", error);
-     }];
-    
-}
--(void)startEvaluateView{
-    NoEvaluateController *controller = [[NoEvaluateController alloc]init];
-    
-    
-    controller.title = @"未评价";
-    [self.navigationController pushViewController:controller animated:YES];
-}
+//-(void)postRequestEvaluate
+//{
+//
+//    NSString *url =[[NSString alloc]initWithFormat:@"%@UserType/evaluate/listGet",BASEURL];
+//    NSMutableDictionary *params = [NSMutableDictionary dictionary];
+//    [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
+//
+//
+//    [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result)
+//     {
+//         NSLog(@"result==%@", result);
+//
+//         NSMutableArray *evaluateArray = [result copy];
+//         if (evaluateArray.count>0) {
+//             [self startEvaluateView];
+//         }else{
+//             MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+//             //            hud.frame = CGRectMake(0, 64, 375, 667);
+//             // Set the annular determinate mode to show task progress.
+//             hud.mode = MBProgressHUDModeText;
+//
+//             hud.label.text = NSLocalizedString(@"无未评价订单", @"HUD message title");
+//             hud.label.font = [UIFont systemFontOfSize:13];
+//             // Move to bottm center.
+//             //    hud.offset = CGPointMake(0.f, );
+//             hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+//             [hud hideAnimated:YES afterDelay:3.f];
+//         }
+//
+//     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
+//         //         [self noIntenet];
+//         NSLog(@"%@", error);
+//     }];
+//
+//}
+//-(void)startEvaluateView{
+//    NoEvaluateController *controller = [[NoEvaluateController alloc]init];
+//
+//
+//    controller.title = @"未评价";
+//    [self.navigationController pushViewController:controller animated:YES];
+//}
 -(void)creatShareView{
     
     

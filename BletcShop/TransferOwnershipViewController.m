@@ -8,6 +8,7 @@
 
 #import "TransferOwnershipViewController.h"
 #import "CheckTransferStateAndEditOrRemoveCardViewController.h"
+#import "InstrumentAlertView.h"
 @interface TransferOwnershipViewController ()
 
 @end
@@ -19,6 +20,22 @@
     self.navigationItem.title=@"会员卡转让";
     self.view.backgroundColor=RGB(240, 240, 240);
     LEFTBACK
+    LZDButton*rightItem=[LZDButton creatLZDButton];
+    [rightItem setImage:[UIImage imageNamed:@"黑色叹号"] forState: UIControlStateNormal];
+    rightItem.frame=CGRectMake(0, 0, 44, 44);
+    rightItem.block = ^(LZDButton*btn)
+    {
+        NSString *content_S = @"不想要的会员卡怎么办？ \n别担心，一键转让， \n然后...就静待你的买主出现吧！";
+        
+        InstrumentAlertView *xlAlertView = [[InstrumentAlertView alloc]initWithTitle:@"说明" message:content_S sureBtn:@"知道了" cancleBtn:@"" logo:nil bgImageView:nil];
+        xlAlertView.resultIndex = ^(NSInteger index){
+            
+        };
+        [xlAlertView showXLAlertView];
+    };
+    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithCustomView:rightItem];
+    self.navigationItem.rightBarButtonItem=item;
+    
     UIView *bgView=[[UIView alloc]initWithFrame:CGRectMake(0, 10, SCREENWIDTH, SCREENHEIGHT-64-10-90)];
     bgView.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:bgView];

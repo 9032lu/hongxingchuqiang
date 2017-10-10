@@ -9,6 +9,7 @@
 #import "OrderViewController.h"
 #import "ValuePickerView.h"
 #import "AppointStateViewController.h"
+#import "InstrumentAlertView.h"
 @interface OrderViewController ()
 {
     
@@ -63,7 +64,26 @@ LEFTBACK
     [button addTarget:self action:@selector(checkClick) forControlEvents:UIControlEventTouchUpInside];
     
     
-    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:button];
+    LZDButton*rightItem=[LZDButton creatLZDButton];
+    [rightItem setImage:[UIImage imageNamed:@"黑色叹号"] forState: UIControlStateNormal];
+    rightItem.frame=CGRectMake(0, 0, 44, 44);
+    rightItem.block = ^(LZDButton*btn)
+    {
+        NSString *content_S = @"提前与商家预约时间 \n少排队少等待 商家有准备，\n服务更到位";
+        
+        InstrumentAlertView *xlAlertView = [[InstrumentAlertView alloc]initWithTitle:@"说明" message:content_S sureBtn:@"知道了" cancleBtn:@"" logo:nil bgImageView:nil];
+        xlAlertView.resultIndex = ^(NSInteger index){
+            
+        };
+        [xlAlertView showXLAlertView];
+    };
+    UIBarButtonItem *item1=[[UIBarButtonItem alloc]initWithCustomView:rightItem];
+    UIBarButtonItem *item2=[[UIBarButtonItem alloc]initWithCustomView:button];
+    
+    
+    self.navigationItem.rightBarButtonItems=@[item1,item2];
+    
+   // self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:button];
     
 
     self.timeArray = [[NSMutableArray alloc]initWithObjects:@"09:00-10:00",@"10:00-11:00",@"11:00-12:00",@"12:00-13:00",@"13:00-14:00",@"14:00-15:00",@"15:00-16:00",@"16:00-17:00",@"17:00-18:00", nil];

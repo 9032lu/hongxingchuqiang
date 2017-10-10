@@ -10,7 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "ShareCardCell.h"
 #import "shareCardModel.h"
-
+#import "InstrumentAlertView.h"
 @interface ShareCardViewController ()<UITextFieldDelegate,UITableViewDelegate,UITableViewDataSource,UIAlertViewDelegate>
 {
     UIView *back_View;
@@ -44,8 +44,8 @@
     [rightBtn setTitleColor:RGB(51, 51, 51) forState:0];
     
         rightBtn.titleLabel.font = [UIFont systemFontOfSize:17];
-        UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
-        self.navigationItem.rightBarButtonItem=rightButton;
+//        UIBarButtonItem *rightButton = [[UIBarButtonItem alloc]initWithCustomView:rightBtn];
+//        self.navigationItem.rightBarButtonItem=rightButton;
     
     
         rightBtn.block = ^(LZDButton *btn){
@@ -67,6 +67,24 @@
             [aletView show];
             
         };
+    
+    LZDButton*rightItem=[LZDButton creatLZDButton];
+    [rightItem setImage:[UIImage imageNamed:@"黑色叹号"] forState: UIControlStateNormal];
+    rightItem.frame=CGRectMake(0, 0, 44, 44);
+    rightItem.block = ^(LZDButton*btn)
+    {
+        NSString *content_S = @"一卡多人用， \n让你的亲朋好友也沾沾福利吧";
+        
+        InstrumentAlertView *xlAlertView = [[InstrumentAlertView alloc]initWithTitle:@"说明" message:content_S sureBtn:@"知道了" cancleBtn:@"" logo:nil bgImageView:nil];
+        xlAlertView.resultIndex = ^(NSInteger index){
+            
+        };
+        [xlAlertView showXLAlertView];
+    };
+    UIBarButtonItem *item1=[[UIBarButtonItem alloc]initWithCustomView:rightItem];
+    UIBarButtonItem *item2=[[UIBarButtonItem alloc]initWithCustomView:rightBtn];
+    self.navigationItem.rightBarButtonItems=@[item1,item2];
+    
     
     [self creatSubViews];
     [self creatbackView];

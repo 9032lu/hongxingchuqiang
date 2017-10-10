@@ -7,7 +7,7 @@
 //
 
 #import "ComplainUnnormalVC.h"
-
+#import "InstrumentAlertView.h"
 @interface ComplainUnnormalVC ()
 @property (weak, nonatomic) IBOutlet UIImageView *topTip;
 @property (weak, nonatomic) IBOutlet UIImageView *bottomTip;
@@ -95,6 +95,23 @@
     [super viewDidLoad];
     self.navigationItem.title=@"理赔申请";
     LEFTBACK
+    
+    LZDButton*rightItem=[LZDButton creatLZDButton];
+    [rightItem setImage:[UIImage imageNamed:@"黑色叹号"] forState: UIControlStateNormal];
+    rightItem.frame=CGRectMake(0, 0, 44, 44);
+    rightItem.block = ^(LZDButton*btn)
+    {
+        NSString *content_S = @"若遇商家倒闭或跑路，您可申请理赔，提交理赔信息后，平台会尽快受理，理赔金额会在理赔申请成功后显示并打入您账号钱包中，如有特殊问题，请咨询客服4008765213";
+        
+        InstrumentAlertView *xlAlertView = [[InstrumentAlertView alloc]initWithTitle:@"说明" message:content_S sureBtn:@"知道了" cancleBtn:@"" logo:nil bgImageView:nil];
+        xlAlertView.resultIndex = ^(NSInteger index){
+            
+        };
+        [xlAlertView showXLAlertView];
+    };
+    UIBarButtonItem *item=[[UIBarButtonItem alloc]initWithCustomView:rightItem];
+    self.navigationItem.rightBarButtonItem=item;
+    
     _proceedView.hidden=YES;
     
     NSMutableAttributedString *AttributedStr = [[NSMutableAttributedString alloc]initWithString: _complainChoosement.text];

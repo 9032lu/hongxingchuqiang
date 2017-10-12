@@ -224,7 +224,7 @@
     UIView *selectView = [[UIView alloc]initWithFrame:CGRectMake(0, 64+1, SCREENWIDTH, 42)];
     selectView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:selectView];
-    NSArray *arr = @[@"二手卡",@"蹭卡"];
+    NSArray *arr = @[@"转让",@"分享"];
     
     
     for (int i = 0; i < arr.count; i ++) {

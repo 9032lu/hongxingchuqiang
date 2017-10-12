@@ -68,6 +68,8 @@
     setTable.backgroundColor=RGB(240, 240, 240);
     setTable.delegate = self;
     setTable.dataSource = self;
+//    setTable.estimatedRowHeight=100;
+    setTable.rowHeight=45;//UITableViewAutomaticDimension;
     setTable.separatorStyle = UITableViewCellSeparatorStyleNone;
     setTable.showsVerticalScrollIndicator = NO;
    // setTable.bounces = NO;
@@ -187,7 +189,9 @@
         }
         
 }
-
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    return [[UIView alloc] init];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

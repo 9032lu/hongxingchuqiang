@@ -85,7 +85,7 @@
             <connections>
                 <outletCollection property="gestureRecognizers" destination="PYV-nb-q9Y" appends="YES" id="I8T-DX-c9l"/>
             </connections>
-            <point key="canvasLocation" x="-499" y="-943"/>
+            <point key="canvasLocation" x="-561" y="-964"/>
         </view>
         <tapGestureRecognizer id="PYV-nb-q9Y">
             <connections>
@@ -96,32 +96,40 @@
             <rect key="frame" x="0.0" y="0.0" width="92" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="灰色搜索icon" translatesAutoresizingMaskIntoConstraints="NO" id="zhO-j0-CRU">
-                    <rect key="frame" x="62" y="13" width="17" height="17"/>
+                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="灰色搜索icon" translatesAutoresizingMaskIntoConstraints="NO" id="zhO-j0-CRU">
+                    <rect key="frame" x="70" y="13" width="17" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="EYz-R7-Omo"/>
                         <constraint firstAttribute="width" constant="17" id="o0N-m1-ltM"/>
                     </constraints>
                 </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="444-Wu-7G6">
+                    <rect key="frame" x="0.0" y="0.0" width="92" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="92" id="JJF-Ue-Dy5"/>
+                        <constraint firstAttribute="height" constant="44" id="yZX-Tv-TV8"/>
+                    </constraints>
+                    <connections>
+                        <action selector="searchClick:" destination="-1" eventType="touchUpInside" id="cuW-om-Ixv"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <gestureRecognizers/>
             <constraints>
+                <constraint firstAttribute="bottom" secondItem="444-Wu-7G6" secondAttribute="bottom" id="Adk-Bu-OFg"/>
+                <constraint firstItem="444-Wu-7G6" firstAttribute="leading" secondItem="pXb-0D-rM2" secondAttribute="leading" id="VVI-TG-Crv"/>
                 <constraint firstItem="zhO-j0-CRU" firstAttribute="centerY" secondItem="pXb-0D-rM2" secondAttribute="centerY" id="Wse-ag-aTK"/>
-                <constraint firstAttribute="trailing" secondItem="zhO-j0-CRU" secondAttribute="trailing" constant="13" id="zdQ-KL-a9x"/>
+                <constraint firstAttribute="bottom" secondItem="zhO-j0-CRU" secondAttribute="bottom" constant="14" id="ZZI-Vz-xqu"/>
+                <constraint firstAttribute="trailing" secondItem="444-Wu-7G6" secondAttribute="trailing" id="c5a-UJ-o7n"/>
+                <constraint firstItem="zhO-j0-CRU" firstAttribute="top" secondItem="pXb-0D-rM2" secondAttribute="top" constant="13" id="kHu-XS-Agb"/>
+                <constraint firstItem="444-Wu-7G6" firstAttribute="top" secondItem="pXb-0D-rM2" secondAttribute="top" id="smc-dY-b8O"/>
+                <constraint firstAttribute="trailing" secondItem="zhO-j0-CRU" secondAttribute="trailing" constant="5" id="zdQ-KL-a9x"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <connections>
-                <outletCollection property="gestureRecognizers" destination="sA8-NV-svE" appends="YES" id="yFG-g4-BC9"/>
-            </connections>
-            <point key="canvasLocation" x="-521" y="-761"/>
+            <point key="canvasLocation" x="-571" y="-1092"/>
         </view>
-        <tapGestureRecognizer id="sA8-NV-svE">
-            <connections>
-                <action selector="searchClcik:" destination="-1" id="dfF-1s-jqr"/>
-            </connections>
-        </tapGestureRecognizer>
     </objects>
     <resources>
         <image name="下拉（灰）" width="18" height="18"/>

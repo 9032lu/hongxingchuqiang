@@ -78,12 +78,13 @@
     
     
 }
-- (IBAction)searchClcik:(UITapGestureRecognizer *)sender {
-    
+- (IBAction)searchClick:(UIButton *)sender {
     NSLog(@"--searchClick--");
     PUSH(CustomSearchVC)
 
+    
 }
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title  = @"周边";
@@ -95,6 +96,8 @@
 
     
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:self.topLeftView];
+    
+    
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
 
     self.addressLab.text = appdelegate.districtString.length >0? appdelegate.districtString : @"雁塔区";

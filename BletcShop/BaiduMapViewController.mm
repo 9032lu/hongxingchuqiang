@@ -46,6 +46,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    LEFTBACK
     _mapView = [[BMKMapView alloc]initWithFrame:CGRectMake(0,0, Width, Height-64)];
     _mapView.showsUserLocation = YES;//显示定位图层
     _mapView.showMapScaleBar = YES;//显示比例尺

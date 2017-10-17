@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *quan_left;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *zeng_left;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bao_left;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *zhe_left;
 
 @end
 @implementation HomeCollectionCell
@@ -61,9 +62,10 @@
     self.trade_lab.text = [NSString stringWithFormat:@"%@   ",_model.trade];
     if ([_model.pri[@"discount"] boolValue]) {
         self.zheLab.text = @"折 ";
-        
+        self.zhe_left.constant = 16;
     }else{
         self.zheLab.text = @"";
+        self.zhe_left.constant = 3;
 
     }
     
@@ -89,9 +91,11 @@
     if ([_model.pri[@"insure"] boolValue]) {
         self.baolab.text = @"保 ";
         
+        self.bao_left.constant = 13;
     }else{
         self.baolab.text = @"";
-        
+        self.bao_left.constant = 0;
+
     }
 
 
@@ -106,9 +110,11 @@
     if (_model.remark.length>0) {
         [self.advertImg sd_setImageWithURL:[NSURL URLWithString:model.long_img_url] placeholderImage:[UIImage imageNamed:@"icon3"]];
         self.advertImg.hidden = NO;
-
+        self.trade_lab.hidden = YES;
     }else{
         self.advertImg.hidden = YES;
+        self.trade_lab.hidden = NO;
+
     }
     
     

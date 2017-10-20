@@ -331,10 +331,22 @@
                 }else if(indexPath.row==5){
                     NSLog(@"%@",cardInfo_dic);
                     if ([cardInfo_dic[@"state"] isEqualToString:@"null"]) {
-                        //没转让也没分享
-                        TransferOwnershipViewController *transferOwnershipVC=[[TransferOwnershipViewController alloc]init];
-                        transferOwnershipVC.dic=self.card_dic;
-                        [self.navigationController pushViewController:transferOwnershipVC animated:YES];
+                        
+                        if ([cardInfo_dic[@"card_type"] isEqualToString:@"计次卡"]){
+                            
+                            MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+                            hud.mode = MBProgressHUDModeText;
+                            hud.label.text = NSLocalizedString(@"计次卡不能转让!", @"HUD message title");
+                            hud.label.font = [UIFont systemFontOfSize:13];
+                            hud.frame = CGRectMake(25, SCREENHEIGHT/2, SCREENWIDTH-50, 100);
+                            [hud hideAnimated:YES afterDelay:2.f];
+                        }else{
+                            //没转让也没分享
+                            TransferOwnershipViewController *transferOwnershipVC=[[TransferOwnershipViewController alloc]init];
+                            transferOwnershipVC.dic=self.card_dic;
+                            [self.navigationController pushViewController:transferOwnershipVC animated:YES];
+                        }
+                      
                         
                     }else if ([cardInfo_dic[@"state"] isEqualToString:@"transfer"]){
                         //转让没分享,去查看编辑页面

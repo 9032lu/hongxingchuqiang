@@ -420,12 +420,21 @@
         
         UILabel *lab = [[UILabel alloc]init];
         lab.frame= CGRectMake(0, 11, SCREENWIDTH-17, 12);
+        
         lab.text = @"收起卡片";
         lab.textColor = RGB(88,87,87);
         lab.textAlignment = NSTextAlignmentCenter;
         lab.font = [UIFont systemFontOfSize:13];
         [cell addSubview:lab];
        
+        if ([self.foldMuta_dia[@"1"] boolValue]) {
+            lab.text = @"收起卡片";
+
+        }else{
+            lab.text = @"展开卡片";
+
+        }
+        
         UIImageView *imgVright = [[UIImageView alloc]initWithFrame:CGRectMake(lab.center.x+35, lab.center.y-6, 6, 12)];
         imgVright.image = [UIImage imageNamed:@"youjiantou"];
         [cell addSubview:imgVright];

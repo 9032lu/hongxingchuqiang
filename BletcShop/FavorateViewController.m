@@ -116,6 +116,8 @@
     cell.shopName.text=[NSString getTheNoNullStr:dic[@"store"] andRepalceStr:@""];
     cell.address.text=[NSString getTheNoNullStr:dic[@"address"] andRepalceStr:@""];
     
+    cell.trade.text = [NSString stringWithFormat:@" %@",[NSString getTheNoNullStr:dic[@"trade"] andRepalceStr:@""]];
+    
     CLLocationCoordinate2D c1 = (CLLocationCoordinate2D){[[dic objectForKey:@"latitude"] doubleValue], [[dic objectForKey:@"longtitude"] doubleValue]};
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     CLLocationCoordinate2D c2 = appdelegate.userLocation.location.coordinate;

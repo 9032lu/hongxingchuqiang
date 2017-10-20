@@ -684,17 +684,40 @@ enum PayTypes {
  */
 -(void)postPaymentsRequest
 {
-#ifdef DEBUG
-    NSString *url = @"http://101.201.100.191//unionpay/demo/api_05_app/TPConsume.php";
+    
+    NSString *url;
+    
+    if (self.orderInfoType==4) {
+        
+        
+        if ([self.card_dic[@"card_type"] isEqualToString:@"储值卡"]) {
+            url =@"http://101.201.100.191/cnconsum/Pay/unionPay/user/ValueCard/upgrade.php";
+            
+        }
+        if ([self.card_dic[@"card_type"] isEqualToString:@"计次卡"]) {
+            url =@"http://101.201.100.191/cnconsum/Pay/unionPay/user/CountCard/upgrade.php";
+            
+        }
+    }else{
+        
+        //续卡
+        
+        if ([self.card_dic[@"card_type"] isEqualToString:@"储值卡"]) {
+            url =@"http://101.201.100.191/cnconsum/Pay/unionPay/user/ValueCard/renew.php";
+            
+        }
+        if ([self.card_dic[@"card_type"] isEqualToString:@"计次卡"]) {
+            url =@"http://101.201.100.191/cnconsum/Pay/unionPay/user/CountCard/renew.php";
+            
+        }
+        
+        
+        
+    }
     
     
-#else
-    NSString *url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/TPConsume.php";
     
-    
-#endif
-    
-//    NSString *url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/TPConsume.php";
+
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
     

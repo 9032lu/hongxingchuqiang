@@ -580,7 +580,6 @@ LEFTBACK
 {
     [self showHUd];
     
-//    NSString *url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/TPConsume.php";
     NSString *url ;
     
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
@@ -594,24 +593,18 @@ LEFTBACK
     [params setValue:_model.card_level forKey:@"card_level"];
     
     
+  
+  
     if ([_model.method isEqualToString:@"share"]) {
         NSLog(@"蹭卡");
         
-
+        url = @"http://101.201.100.191/cnconsum/Pay/unionPay/user/CardMarket/share.php";
         
-#ifdef DEBUG
-       url = @"http://101.201.100.191//unionpay/demo/api_05_app/Share.php";
-        
-        
-#else
-        url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/Share.php";
-        
-        
-#endif
         
         [params setValue:_model.card_type forKey:@"card_type"];
         [params setValue:allPayMoney forKey:@"b_sum"];
-        
+        [params setValue:[NSString stringWithFormat:@"%g",[allPayMoney floatValue]*100] forKey:@"txnAmt"];
+
         
         
         [params setValue:chargeMoney forKey:@"s_sum"];
@@ -620,10 +613,13 @@ LEFTBACK
         NSLog(@"买二手卡");
         
 
-        url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/Transfer.php";
-        
+        url= @"http://101.201.100.191/cnconsum/Pay/unionPay/user/CardMarket/transfer.php";
+
 
         [params setValue:priceString forKey:@"sum"];
+        
+        [params setValue:[NSString stringWithFormat:@"%g",[priceString floatValue]*100] forKey:@"txnAmt"];
+
         
     }
     

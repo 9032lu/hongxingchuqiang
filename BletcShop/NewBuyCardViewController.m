@@ -1083,32 +1083,41 @@
 -(void)postBuyMealCardREquest{
     
     
-    NSString *url;
+//    NSString *url;
     [self showHUd];
 
-#ifdef DEBUG
-    if ([self.cardListArray[_selectRow][@"type"] isEqualToString:@"套餐卡"]) {
-        url = @"http://101.201.100.191/unionpay/demo/api_05_app/MealCardBuy.php";
-        
-    }
-    if ([self.cardListArray[_selectRow][@"type"] isEqualToString:@"体验卡"]) {
-        url = @"http://101.201.100.191/unionpay/demo/api_05_app/ExperienceCardBuy.php";
-        
-    }
+//#ifdef DEBUG
+//    if ([self.cardListArray[_selectRow][@"type"] isEqualToString:@"套餐卡"]) {
+//        url = @"http://101.201.100.191/unionpay/demo/api_05_app/MealCardBuy.php";
+//
+//    }
+//    if ([self.cardListArray[_selectRow][@"type"] isEqualToString:@"体验卡"]) {
+//        url = @"http://101.201.100.191/unionpay/demo/api_05_app/ExperienceCardBuy.php";
+//
+//    }
+//
+//
+//#else
+//    if ([self.cardListArray[_selectRow][@"type"] isEqualToString:@"套餐卡"]) {
+//        url = @"http://101.201.100.191/upacp_demo_app/demo/api_05_app/MealCardBuy.php";
+//
+//    }
+//    if ([self.cardListArray[_selectRow][@"type"] isEqualToString:@"体验卡"]) {
+//        url = @"http://101.201.100.191/upacp_demo_app/demo/api_05_app/ExperienceCardBuy.php";
+//
+//    }
+//
+//
+//#endif
+//
     
     
-#else
-    if ([self.cardListArray[_selectRow][@"type"] isEqualToString:@"套餐卡"]) {
-        url = @"http://101.201.100.191/upacp_demo_app/demo/api_05_app/MealCardBuy.php";
-        
-    }
-    if ([self.cardListArray[_selectRow][@"type"] isEqualToString:@"体验卡"]) {
-        url = @"http://101.201.100.191/upacp_demo_app/demo/api_05_app/ExperienceCardBuy.php";
-        
+    NSString *url = @"http://101.201.100.191/cnconsum/Pay/unionPay/user/MealCard/buy.php";
+    
+    if ([_card_dic[@"type"] isEqualToString:@"体验卡"]) {
+        url = @"http://101.201.100.191/cnconsum/Pay/unionPay/user/ExperienceCard/buy.php";
     }
     
-    
-#endif
     
     
     
@@ -1391,19 +1400,22 @@
 {
     [self showHUd];
     
-#ifdef DEBUG
-    NSString *url = @"http://101.201.100.191//unionpay/demo/api_05_app/TPConsume.php";
-    
-    
-#else
-    NSString *url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/TPConsume.php";
-    
-    
-#endif
-    
-    //    NSString *url = @"http://101.201.100.191//upacp_demo_app/demo/api_05_app/TPConsume.php";
-    NSMutableDictionary *params = [NSMutableDictionary dictionary];
     AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
+
+   NSString* url = @"http://101.201.100.191/cnconsum/Pay/unionPay/user/CountCard/buy.php";
+
+    
+
+    if ([appdelegate.cardInfo_dic[@"type"] isEqualToString:@"储值卡"]) {
+        url = @"http://www.cnconsum.com/cnconsum/Pay/unionPay/user/ValueCard/buy.php";
+
+    }
+    
+    
+    
+
+    
+    NSMutableDictionary *params = [NSMutableDictionary dictionary];
     
     [params setObject:appdelegate.cardInfo_dic[@"muid"] forKey:@"muid"];
     [params setObject:appdelegate.userInfoDic[@"uuid"] forKey:@"uuid"];
@@ -1450,7 +1462,7 @@
  
     
     
-    NSLog(@"params-----%@",params);
+    NSLog(@"params-----=%@%@",params,url);
     
     
     [KKRequestDataService requestWithURL:url params:params httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
@@ -1504,124 +1516,7 @@
 -(void)buyUseAlipayForMealOrExperience{
     
     
-//
-//    
-//    AppDelegate *appdelegate=(AppDelegate*)[[UIApplication sharedApplication]delegate];
-//    appdelegate.whoPay =1;//办卡
-//    /*
-//     *生成订单信息及签名
-//     */
-//    //将商品信息赋予AlixPayOrder的成员变量
-//    Order *order = [[Order alloc] init];
-//    order.partner = kAlipayPartner;
-//    order.sellerID = kAlipaySeller;
-//    int x= arc4random()%100000;
-//    NSDate *currentDate = [NSDate date];//获取当前时间，日期
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setDateFormat:@"YYYYMMddhhmmss"];
-//    NSString *dateString = [dateFormatter stringFromDate:currentDate];
-//    
-//    dateString = [dateString stringByReplacingOccurrencesOfString:@":" withString:@""];
-//    dateString = [dateString stringByReplacingOccurrencesOfString:@" " withString:@""];
-//    
-//    NSString *outtrade =[[NSString alloc]initWithFormat:@"%@%5d",dateString,x];
-//    NSLog(@"%@",outtrade);
-//    order.outTradeNO = outtrade; //订单ID（由商家自行制定）
-//    order.subject = @"办卡"; //商品标题
-//    
-//
-//    if (self.Type==Wares) {
-//        
-//        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@",@"cp",appdelegate.userInfoDic[@"uuid"],_card_dic[@"muid"],_card_dic[@"code"],self.coup_dic[@"coupon_id"],[self.contentLabel.text substringFromIndex:4]];
-//        
-//    }else if (self.Type==plat_Ware) {
-//        
-//        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@",@"scp",appdelegate.userInfoDic[@"uuid"],_card_dic[@"muid"],_card_dic[@"code"],self.plat_coup_dic[@"id"],_card_dic[@"price"]];
-//        
-//    }else if (self.Type == points) {
-//        
-//        
-//        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@",@"rp",appdelegate.userInfoDic[@"uuid"],_card_dic[@"muid"],_card_dic[@"code"],[[NSString alloc]initWithFormat:@"%.f",self.canUsePoint],_card_dic[@"price"]];
-//        
-//    }else{
-//        
-//        order.body =[[NSString alloc]initWithFormat:@"%@#%@#%@#%@#%@#%@",@"null",appdelegate.userInfoDic[@"uuid"],_card_dic[@"muid"],_card_dic[@"code"],@"null",_card_dic[@"price"]];
-//    }
-//    
-//    NSLog(@"order.body====%@",order.body);
-//    
-//
-//    order.totalFee = [self.contentLabel.text substringFromIndex:4]; //商品价格
-////    order.totalFee = @"0.01"; //商品价格
-//
-//    if ([self.cardListArray[_selectRow][@"type"] isEqualToString:@"套餐卡"]) {
-//        order.notifyURL =  @"http://101.201.100.191/alipay/meal_card_buy.php"; //回调URL
-//
-//    }
-//    if ([self.cardListArray[_selectRow][@"type"] isEqualToString:@"体验卡"]) {
-//    order.notifyURL =  @"http://101.201.100.191/alipay/experience_card_buy.php"; //回调URL
-//
-//    }
-//
-//    
-//    order.service = @"mobile.securitypay.pay";
-//    order.paymentType = @"1";
-//    order.inputCharset = @"utf-8";
-//    order.itBPay = @"30m";
-//    order.showURL = @"m.alipay.com";
-//    
-//    //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
-//    NSString *appScheme = @"blectShop";
-//    
-//    //将商品信息拼接成字符串
-//    NSString *orderSpec = [order description];
-//    NSLog(@"orderSpec = %@",orderSpec);
-//    
-//    //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
-//    id<DataSigner> signer = CreateRSADataSigner(kAlipayPrivateKey);
-//    NSString *signedString = [signer signString:orderSpec];
-//    
-//    //将签名成功字符串格式化为订单字符串,请严格按照该格式
-//    NSString *orderString = nil;
-//    if (signedString != nil) {
-//        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
-//                       orderSpec, signedString, @"RSA"];
-//        
-//        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic)
-//         {
-//             NSLog(@"BuyCardChoicePayViewControllerreslut = %@",resultDic);
-//             NSInteger orderState=[resultDic[@"resultStatus"] integerValue];
-//             if (orderState==9000) {
-//                 
-//                 PaySuccessVc *VC = [[PaySuccessVc alloc]init];
-//                 VC.orderInfoType = self.orderInfoType;
-//                 VC.card_dic = self.card_dic;
-//                 if (self.Type== Wares) {
-//                     VC.money_str = [self.contentLabel.text substringFromIndex:4];
-//                     
-//                 }else{
-//                     VC.money_str = self.card_dic[@"price"];
-//                     
-//                 }
-//                 
-//                 [self.navigationController pushViewController:VC animated:YES];
-//                 
-//                 
-//                
-//                 
-//             }else{
-//                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"提示" message:@"是否放弃当前交易?" delegate:self cancelButtonTitle:@"放弃" otherButtonTitles:@"去支付", nil];
-//                 alert.tag =1111;
-//                 [alert show];
-//                 
-//             }
-//             
-//             
-//             
-//         }];
-//        
-//    }
-    
+
     
     
     

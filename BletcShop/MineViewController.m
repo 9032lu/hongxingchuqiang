@@ -372,7 +372,7 @@
             }else if(indexPath.row==3){
                 cell.desLale.text=@"听说高颜值自带强大推荐属性";
             }else{
-                cell.desLale.text=@"邀好友赚红包，一不小心又套路了一把";
+                cell.desLale.text=@"邀请好友赚红包";
             }
         }else{
             cell.desLale.hidden=YES;

@@ -12,5 +12,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *vipCardBgImage;
 @property (weak, nonatomic) IBOutlet UILabel *shopName;
 @property (weak, nonatomic) IBOutlet UILabel *cardStyleAndLevel;
+@property (weak, nonatomic) IBOutlet UILabel *tradeLab;
 
 @end

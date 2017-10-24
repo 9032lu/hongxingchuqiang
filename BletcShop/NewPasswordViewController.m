@@ -111,7 +111,7 @@
     }
 }
 -(void)postRequest{
-    NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/reset",BASEURL];
+    NSString *url =[[NSString alloc]initWithFormat:@"%@Extra/passwd/reset",BASEURL];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:self.phone forKey:@"phone"];
     //此处需判断是谁进入了该页面，商户还是用户
@@ -123,6 +123,10 @@
 
          if ([result[@"result_code"] intValue]==1) {
              //
+             
+             
+             [self showHint:@"修改成功"];
+             
              if ([self.type isEqualToString:@"m"]) {
                  //去商户端登录界面
                 

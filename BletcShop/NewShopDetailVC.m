@@ -901,6 +901,7 @@
     timeLable1_2.font=[UIFont systemFontOfSize:15.0f];
     [backView addSubview:timeLable1_2];
     NSString *time1_2=[NSString getTheNoNullStr:wholeInfoDic[@"service"] andRepalceStr:@"暂无服务说明!"];
+    time1_2 = [time1_2 stringByReplacingOccurrencesOfString:@"," withString:@"\r"];
     
     CGFloat labelHeight1_2 = [time1_2 getTextHeightWithShowWidth:SCREENWIDTH AndTextFont:[UIFont systemFontOfSize:15.0] AndInsets:5];
     

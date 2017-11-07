@@ -239,10 +239,10 @@
         
         NSString *header_S = [[self.user_P.idstring componentsSeparatedByString:@"_"] firstObject];
         if ([header_S isEqualToString:@"u"]) {
-            [self.chatIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HEADIMAGE,self.user_P.imgStr]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"user"]];
+            [self.chatIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",HEADIMAGE,self.user_P.imgStr]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"userHeader"]];
 
         }else{
-            [self.chatIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",SHOPIMAGE_ADDIMAGE,self.user_P.imgStr]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"user"]];
+            [self.chatIcon sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@",SHOPIMAGE_ADDIMAGE,self.user_P.imgStr]] forState:UIControlStateNormal placeholderImage:[UIImage imageNamed:@"userHeader"]];
 
         }
         

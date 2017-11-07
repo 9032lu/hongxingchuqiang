@@ -44,6 +44,9 @@
 + (UIImage*)setThumbnailFromImage:(UIImage*)image;//生成缩略图
 
 
++ (NSString *)deviceIPAdress;
+
+
 
 @end
 

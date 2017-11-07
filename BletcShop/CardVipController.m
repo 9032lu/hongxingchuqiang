@@ -491,11 +491,11 @@
     
 }
 -(BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section ==self.wholeDataArray.count-1) {
-        return NO;
-    }else
-        
-    return YES;
+//    if (indexPath.section ==self.wholeDataArray.count-1) {
+//        return NO;
+//    }else
+    
+    return NO;
 }
 
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath{

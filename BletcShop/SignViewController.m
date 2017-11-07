@@ -24,24 +24,36 @@
 }
 - (IBAction)clickBtn:(UIButton *)sender {
     
-    NSString *url = [NSString stringWithFormat:@"%@Extra/index/signTest",BASEURL];
+    NSString *url = @"http://192.168.0.168/cnconsum/app/extra/operate/enter";
     
     NSString *randCode =self.textField.text;
     NSString *timestap = [NSString getCurrentTimestamp];
     
     
-    NSMutableDictionary*paramer = [NSMutableDictionary dictionary];
-    [paramer setValue:randCode forKey:@"randCode"];
-    [paramer setValue:timestap forKey:@"timestap"];
-    [paramer setValue:[NSString getSecretStringWithRandCode:randCode andTimestamp:timestap] forKey:@"sign"];
+    NSMutableDictionary*pa = [NSMutableDictionary dictionary];
+    [pa setValue:randCode forKey:@"randCode"];
+    [pa setValue:timestap forKey:@"timestap"];
+    [pa setValue:[NSString getSecretStringWithRandCode:randCode andTimestamp:timestap] forKey:@"sign"];
 
+    NSString *s = [NSString dictionaryToJson:pa];
+    
+    NSMutableDictionary *paramer = [NSMutableDictionary dictionary];
+    [paramer setValue:s forKey:@"params"];
+    
+    
     NSLog(@"==%@==%@",paramer,url);
     [KKRequestDataService requestWithURL:url params:paramer httpMethod:@"POST" finishDidBlock:^(AFHTTPRequestOperation *operation, id result) {
         
+        
+        [self showHint:[NSString dictionaryToJson:result]];
         NSLog(@"=====%@",result);
         
     } failuerDidBlock:^(AFHTTPRequestOperation *operation, NSError *error) {
         
+        [self showHint:error.description];
+
+        NSLog(@"error=====%@",error);
+
     }];
 
 }
